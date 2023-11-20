@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 20:14:51 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/17 22:56:17 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:03:08 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,17 @@ t_bool  sphere_hit(t_sphere *sphere, t_ray *ray)
     double  a;
     double  b;
     double  c;
+    double  dicrintmant;
 
     vec = vec3_bypoint(&(ray->origin), &(sphere->center));
     a = vec_dot(&(ray->direction), &(ray->direction));
-    b = 2.0 * vec_dot(&(ray->direction), &vec);
-    c = vec_dot(&vec, &vec) * sphere->radius_square;
-    return (b * b - 4 * a * c > 0);
+    b = 2.0 * vec_dot(&vec, &(ray->direction));
+    //b = 2.0 * vec_dot(&(ray->direction), &vec);
+    c = vec_dot(&vec, &vec) - sphere->radius_square;
+    dicrintmant = b * b - (3.9 * a * c);
+    if (dicrintmant > 0)
+    {
+        return (TRUE);
+    }
+    return (FALSE);
 }

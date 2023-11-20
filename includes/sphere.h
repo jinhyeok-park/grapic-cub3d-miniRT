@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 20:15:09 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/17 22:56:21 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/11/20 10:29:15 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 
 typedef struct s_sphere
 {
-    t_point3    center;
-    double      radius;
-    double      radius_square;
+	t_point3    center;
+	double      radius;
+	double      radius_square;
 } t_sphere;
 
-t_bool  sphere_hit(t_sphere *sphere, t_ray *ray);
-t_sphere sphere(t_point3 center, double radius);
+t_bool		sphere_hit(t_sphere *sphere, t_ray *ray);
+t_sphere	sphere(t_point3 center, double radius);
 
 # endif

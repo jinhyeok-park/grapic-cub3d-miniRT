@@ -180,7 +180,7 @@ int	main(int ac, char **av)
     // // 이벤트 루프 시작
     // mlx_loop(mlx_ptr);
 
-        int         i;
+    int         i;
     int         j;
     /* * * * 추가 * * * */
     double      u;
@@ -192,8 +192,10 @@ int	main(int ac, char **av)
     t_canvas    canv;
     t_camera    cam;
     t_ray       ray;
+    t_sphere    circle;
 
     //Scene setting;
+    circle = sphere(point3(0, 0, -5), 2);
     canv = canvas(1980, 1080);
     cam = camera(&canv, point3(0, 0, 0));
     /* * * * 수정 끝 * * * */
@@ -212,7 +214,7 @@ int	main(int ac, char **av)
             u = (double)i / (canv.width - 1);
             v = (double)j / (canv.height - 1);
             ray = ray_primary(&cam, u, v);
-            pixel_color = ray_color(&ray);
+            pixel_color = ray_color(&ray, &circle);
             write_color(pixel_color, &img, i, j );
             ++i;
         }

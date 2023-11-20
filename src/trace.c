@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:48:50 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/17 22:56:44 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:44:38 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 	ret.direction = vec3_bypoint(&temp, &(cam->camera_position));
 	return (ret);
 }
+#include <stdio.h>
 
 t_color3    ray_color(t_ray *r, t_sphere *sphere)
 {
@@ -54,7 +55,10 @@ t_color3    ray_color(t_ray *r, t_sphere *sphere)
 	t_color3	temp2;
 
 	if (sphere_hit(sphere, r))
+	{
+		printf("in");
 		return (color3(1,0,0));
+	}
     t = 0.5 * (r->direction.y + 1.0);// linear 
 	temp = color3(1, 1, 1);
 	temp2 = color3(0.5, 0.7, 1.0);

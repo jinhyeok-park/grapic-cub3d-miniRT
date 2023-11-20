@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:42:31 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/17 22:57:15 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/11/20 10:43:47 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "ray.h"
 #include "camera.h"
+#include "sphere.h"
 
 t_ray       ray(t_point3 *origin, t_vec3 *direction);
 t_point3    ray_headpoint(t_ray *ray, double distance);
