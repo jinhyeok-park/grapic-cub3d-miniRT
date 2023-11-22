@@ -87,7 +87,7 @@ void write_color(t_color3 pixel_color, t_data *img, int x, int y) {
 
     int color;
 
-    color = (ir << 16) | (ig << 8) | ib; // to 32bit
+    color = (ir << 16) | (ig << 8) |  ib;// to 32bit
     my_mlx_pixel_put(img, x, y, color);
 }
 

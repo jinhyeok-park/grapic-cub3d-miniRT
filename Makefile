@@ -6,7 +6,7 @@
 #    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 21:30:27 by jinhyeok          #+#    #+#              #
-#    Updated: 2023/11/17 22:51:49 by jinhyeok         ###   ########.fr        #
+#    Updated: 2023/11/21 00:11:23 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,6 @@ $(NAME): $(OBJECTS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
-bonus :
-	make BONUS=1 all
 
 clean:
 	make -C ft_printf clean
@@ -57,7 +55,6 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf ./so_long_bonus
 	rm -rf ./libftprintf.a
 	rm -rf ./mlx/libmlx.dylib
 	rm -rf libmlx.dylib
