@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
+#    By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 21:30:27 by jinhyeok          #+#    #+#              #
-#    Updated: 2023/11/21 00:11:23 by jinhyeok         ###   ########.fr        #
+#    Updated: 2023/11/23 17:02:19 by minjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ clean:
 	make -C mlx clean
 
 fclean: clean
+	make -C ft_printf fclean
 	rm -rf $(NAME)
 	rm -rf ./libftprintf.a
 	rm -rf ./mlx/libmlx.dylib
