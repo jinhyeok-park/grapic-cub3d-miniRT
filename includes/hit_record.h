@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trace.h                                            :+:      :+:    :+:   */
+/*   hit_record.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 16:42:31 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/28 20:24:06 by jinhyeok         ###   ########.fr       */
+/*   Created: 2023/11/28 20:20:01 by jinhyeok          #+#    #+#             */
+/*   Updated: 2023/11/28 20:23:11 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRACE_H
-# define TRACE_H
+#ifndef HIT_RECORD
+#define HIT_RECORD
 
-#include "ray.h"
-#include "camera.h"
-#include "sphere.h"
+#include "vector.h"
+#include "commontype.h"
 
-t_ray       ray(t_point3 *origin, t_vec3 *direction);
-t_point3    ray_headpoint(t_ray *ray, double distance);
-t_ray       ray_primary(t_camera *cam, double x, double y);
-//t_color3	ray_color(t_ray *ray);
-t_color3    ray_color(t_ray *r, t_sphere *sphere);
-
+typedef struct s_hit_record
+{
+    t_point3    p;
+    t_vec3      normal;
+    double      tmin;
+    double      tmax;
+    double      t;
+    t_bool      front_face;
+} t_hit_record;
 
 #endif

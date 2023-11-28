@@ -6,12 +6,13 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:48:50 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/21 00:01:32 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/11/28 20:32:32 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "trace.h"
 #include "sphere.h"
+#include "hit_record.h"
 
 t_ray	ray(t_point3 *origin, t_vec3 *direction)
 {
@@ -53,9 +54,14 @@ t_color3    ray_color(t_ray *r, t_sphere *sphere)
     double  	t;
 	t_color3	temp;
 	t_color3	temp2;
+	t_hit_record	rec;
 
+	rec.tmin = 0;
+	rec.tmax = __DBL_MAX__;
 	if (sphere_hit(sphere, r))
+	{
 		return (color3(1,0,0));
+	}
     t = 0.5 * (r->direction.y + 1.0);// linear 
 	temp = color3(1, 1, 1);
 	temp2 = color3(0.5, 0.7, 1.0);

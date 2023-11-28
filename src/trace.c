@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:48:50 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/21 00:01:32 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/11/28 21:19:58 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,32 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 	ret.direction = vec3_bypoint(&temp, &(cam->camera_position));
 	return (ret);
 }
+
 #include <stdio.h>
+#include "hit_record.h"
 
 t_color3    ray_color(t_ray *r, t_sphere *sphere)
 {
     double  	t;
 	t_color3	temp;
 	t_color3	temp2;
+	t_hit_record rec;
 
-	if (sphere_hit(sphere, r))
-		return (color3(1,0,0));
+	rec.tmin = 0;
+	rec.tmax = __DBL_MAX__;
+	//if (sphere_hit(sphere, r, rec))
+	if (sphere_hit(sphere, r, &rec))
+	{
+		t_point3 point;
+		t_color3 ret;
+		t_vec3	vec_temp;
+		point = ray_headpoint(r, rec.t);
+		t_vec3 vect = vec3_bypoint(&point, &(sphere->center));
+		vec_temp = vec_unit(&vect);
+
+		ret = color3((vec_temp.x + 1) * 0.5, (vec_temp.y + 1) * 0.5, (vec_temp.z + 1) * 0.5);
+		return (ret);
+	}
     t = 0.5 * (r->direction.y + 1.0);// linear 
 	temp = color3(1, 1, 1);
 	temp2 = color3(0.5, 0.7, 1.0);

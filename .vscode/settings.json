@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "vector.h": "c"
+        "vector.h": "c",
+        "trace.h": "c",
+        "sphere.h": "c"
     }
 }

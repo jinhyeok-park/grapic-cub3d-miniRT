@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 20:14:51 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/23 17:03:16 by minjcho          ###   ########.fr       */
+/*   Updated: 2023/11/28 21:13:48 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sphere.h"
+#include "trace.h"
+#include "hit_record.h"
+#include <math.h>
+
 
 t_sphere sphere(t_point3 center, double radius)
 {
@@ -22,7 +26,9 @@ t_sphere sphere(t_point3 center, double radius)
     return (ret);
 }
 
-t_bool  sphere_hit(t_sphere *sphere, t_ray *ray)
+#include <stdio.h>
+
+t_bool  sphere_hit(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
 {
     t_vec3  vec;
     double  a;
@@ -32,13 +38,32 @@ t_bool  sphere_hit(t_sphere *sphere, t_ray *ray)
 
     vec = vec3_bypoint(&(ray->origin), &(sphere->center));
     a = vec_dot(&(ray->direction), &(ray->direction));
-    b = 2.0 * vec_dot(&vec, &(ray->direction));
-    //b = 2.0 * vec_dot(&(ray->direction), &vec);
+    b = vec_dot(&vec, &(ray->direction));
     c = vec_dot(&vec, &vec) - sphere->radius_square;
-    dicrintmant = b * b - (4.0 * a * c);
-    if (dicrintmant > 0)
+
+    dicrintmant = b * b - (a * c);
+
+    if (dicrintmant < 0)
+        return (FALSE);
+    double sqrtd = (double)sqrt(dicrintmant);
+    double root = (- b - sqrtd) / a;
+    if (root < rec->tmin || rec->tmax < root)
     {
-        return (TRUE);
+     root = (- b + sqrtd) / a;
+     if (root < rec->tmin || rec->tmax < root)
+          return (FALSE);
     }
-    return (FALSE);
+    rec->t = root;
+    rec->p = ray_headpoint(ray, root);
+    rec->normal = vec3_bypoint(&(rec->p), &(sphere->center));
+    rec->normal = vec_divide_scala(&(rec->normal), sphere->radius);
+    set_face_normal(ray, rec);
+    return (TRUE);
+}
+
+void    set_face_normal(t_ray *ray, t_hit_record *rec)
+{
+    rec->front_face = vec_dot(&(ray->direction), &(rec->normal));
+    if (rec->front_face < 0)
+        rec->normal = vec_multi_scala(&(rec->normal), -1);
 }
