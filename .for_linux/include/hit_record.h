@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   hit_record.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:18:39 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/29 03:03:13 by jinhyeok         ###   ########.fr       */
+/*   Created: 2023/11/28 20:20:01 by jinhyeok          #+#    #+#             */
+/*   Updated: 2023/11/28 20:23:11 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef HIT_RECORD
+#define HIT_RECORD
 
+#include "vector.h"
+#include "commontype.h"
 
-#ifndef MINIRT_H
-# define MINIRT_H
-
-# include <fcntl.h>
-# include "get_next_line.h"
-# include "mlx.h"
-
+typedef struct s_hit_record
+{
+    t_point3    p;
+    t_vec3      normal;
+    double      tmin;
+    double      tmax;
+    double      t;
+    t_bool      front_face;
+} t_hit_record;
 
 #endif

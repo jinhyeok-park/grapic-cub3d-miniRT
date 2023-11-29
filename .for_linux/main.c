@@ -90,12 +90,9 @@ void write_color(t_color3 pixel_color, t_data *img, int x, int y) {
     color = (ir << 16) | (ig << 8) |  ib;// to 32bit
     my_mlx_pixel_put(img, x, y, color);
 }
-#include "camera.h"
 
 int	main(int ac, char **av)
 {
-    (void)ac;
-    (void)av;
 	// ft_printf("in here");
 	// void	*mlx;
 	// void	*mlx_window;
