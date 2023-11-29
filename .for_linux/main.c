@@ -13,6 +13,7 @@
 
 #include "minirt.h"
 #include "vector.h"
+#include "object.h"
 
 void	my_mlx_line2d(void *mlx_ptr, void *win_ptr, int x0, int y0, int x1, int y1);
 
@@ -49,7 +50,8 @@ t_vec3 transform_point(t_vec3 point)
 
 #include <math.h>
 #include "camera.h"
-#include "trace.h"
+//#include "trace.h"
+#include "./include/trace.h"
 #include <stdio.h>
 
 void	my_mlx_line2d(void *mlx_ptr, void *win_ptr, int x0, int y0, int x1, int y1)
@@ -191,11 +193,18 @@ int	main(int ac, char **av)
     /* * * * 수정 * * * */
     t_canvas    canv;
     t_camera    cam;
+    void        *temp_v;
     t_ray       ray;
     t_sphere    circle;
+    t_sphere    circle2;
+    t_object    **obj_vector;
 
     //Scene setting;
-    circle = sphere(point3(0, 0, -5), 2);
+    obj_vector = vector_create();
+    circle = sphere(point3(0, 0, -15), 2);
+    circle2 = sphere(point3(2, 0, -15), 2);
+    vector_push_back(obj_vector, (void*)&circle, CIRCLE);
+    vector_push_back(obj_vector, (void*)&circle2, CIRCLE);
     canv = canvas(1980, 1080);
     cam = camera(&canv, point3(0, 0, 0));
     /* * * * 수정 끝 * * * */
@@ -214,7 +223,8 @@ int	main(int ac, char **av)
             u = (double)i / (canv.width - 1);
             v = (double)j / (canv.height - 1);
             ray = ray_primary(&cam, u, v);
-            pixel_color = ray_color(&ray, &circle);
+            // pixel_color = ray_color(&ray, &circle);
+            pixel_color = ray_color1(&ray, obj_vector);
             write_color(pixel_color, &img, i, j );
             ++i;
         }

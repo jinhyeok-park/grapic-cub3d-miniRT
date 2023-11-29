@@ -6,13 +6,13 @@
 #    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 01:29:49 by jinhyeok          #+#    #+#              #
-#    Updated: 2023/11/29 03:04:15 by jinhyeok         ###   ########.fr        #
+#    Updated: 2023/11/29 07:28:52 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 #CFLAGS = -Wall -Wextra -Werror -Iinclude -I./minilibx-linux/
-CFLAGS = -Iinclude -I./minilibx-linux/
+CFLAGS = -I./include -I./minilibx-linux/
 LDFLAGS = -L./minilibx-linux  -lmlx -lXext -lX11 -lm
 
 TARGET = miniRT
@@ -26,7 +26,8 @@ SRC = ./main.c \
 	./color.c \
 	./sphere.c \
 	./trace.c \
-	./camera.c
+	./camera.c \
+	./object.c
 	
 
 OBJ = $(SRC:.c=.o)
