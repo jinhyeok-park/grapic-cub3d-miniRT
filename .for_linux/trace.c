@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:48:50 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/29 07:55:07 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/04 10:59:18 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ t_color3    ray_color1(t_ray *r, t_object **obj_vector)
 			}
 		}
 	}
-	printf("hit");
     t = 0.5 * (r->direction.y + 1.0);// linear 
 	temp = color3(1, 1, 1);
 	temp2 = color3(0.5, 0.7, 1.0);

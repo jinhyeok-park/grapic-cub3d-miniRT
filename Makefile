@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+         #
+#    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 21:30:27 by jinhyeok          #+#    #+#              #
-#    Updated: 2023/11/23 17:02:19 by minjcho          ###   ########.fr        #
+#    Updated: 2023/12/04 16:10:56 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,9 @@ SOURCES = ./src/main.c\
 			./src/trace.c\
 			./src/color.c\
 			./src/sphere.c\
+			./src/object.c\
+			./src/scene.c\
+			./src/light.c\
 
 SOURCES_BONUS =
 
@@ -44,7 +47,7 @@ $(NAME): $(OBJECTS)
 	make -C ft_printf
 	make -C mlx
 	cp ./mlx/libmlx.dylib ./libmlx.dylib
-	$(CC) $^ -Lft_printf -lftprintf -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@ -I $(INCLUDES)
+	$(CC) $^ -Lft_printf -lftprintf -I./mlx -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@ -I $(INCLUDES)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

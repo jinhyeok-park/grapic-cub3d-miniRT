@@ -2,6 +2,8 @@
     "files.associations": {
         "vector.h": "c",
         "trace.h": "c",
-        "sphere.h": "c"
+        "sphere.h": "c",
+        "light.h": "c",
+        "object.h": "c"
     }
 }

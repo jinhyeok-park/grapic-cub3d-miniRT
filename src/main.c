@@ -6,13 +6,14 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:17:21 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/11/14 14:52:09by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/15 21:49:22 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minirt.h"
 #include "vector.h"
+#include "object.h"
 
 void	my_mlx_line2d(void *mlx_ptr, void *win_ptr, int x0, int y0, int x1, int y1);
 
@@ -49,6 +50,7 @@ t_vec3 transform_point(t_vec3 point)
 
 #include <math.h>
 #include "camera.h"
+//#include "trace.h"
 #include "trace.h"
 #include <stdio.h>
 
@@ -191,11 +193,21 @@ int	main(int ac, char **av)
     /* * * * 수정 * * * */
     t_canvas    canv;
     t_camera    cam;
+    void        *temp_v;
     t_ray       ray;
     t_sphere    circle;
+    t_sphere    circle2;
+    t_sphere    circle3;
+    t_object    **obj_vector;
 
     //Scene setting;
-    circle = sphere(point3(0, 0, -5), 2);
+    obj_vector = vector_create();
+    circle = sphere(point3(-2, 0, -15), 2);
+    circle2 = sphere(point3(2, 0, -15), 2);
+    circle3 = sphere(point3(0, -1000, 0), 994);
+    vector_push_back(obj_vector, (void*)&circle, CIRCLE);
+    vector_push_back(obj_vector, (void*)&circle2, CIRCLE);
+    vector_push_back(obj_vector, (void*)&circle3, CIRCLE);
     canv = canvas(1980, 1080);
     cam = camera(&canv, point3(0, 0, 0));
     /* * * * 수정 끝 * * * */
@@ -214,7 +226,8 @@ int	main(int ac, char **av)
             u = (double)i / (canv.width - 1);
             v = (double)j / (canv.height - 1);
             ray = ray_primary(&cam, u, v);
-            pixel_color = ray_color(&ray, &circle);
+            // pixel_color = ray_color(&ray, &circle);
+            pixel_color = ray_color1(&ray, obj_vector);
             write_color(pixel_color, &img, i, j );
             ++i;
         }
@@ -223,3 +236,45 @@ int	main(int ac, char **av)
 	mlx_put_image_to_window(mlx_ptr, win_ptr, img.img, 0, 0);//이미지를 윈도우에 올린다.
 	mlx_loop(mlx_ptr);
 }
+
+#include "scene.h"
+
+// int	main(int ac, char **av)
+// {
+//     void    *mlx_ptr;
+//     void    *win_ptr;
+//     t_data  img;
+
+//     mlx_ptr = mlx_init();
+//     win_ptr = mlx_new_window(mlx_ptr, 1980, 1080, "miniRT canvas");
+// 	img.img = mlx_new_image(mlx_ptr, 1980, 1080);
+// 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+
+//     int         i;
+//     int         j;
+//     double      u;
+//     double      v;
+
+//     t_color3    pixel_color;
+//     t_ray       ray;
+//     t_scene     *scene;
+    
+//     scene = scene_init();
+//     j = scene->canvas.height - 1;
+//     while (j >= 0)
+//     {
+//         i = 0;
+//         while (i < scene->canvas.width)
+//         {
+//             u = (double)i / (scene->canvas.width - 1);
+//             v = (double)j / (scene->canvas.height - 1);
+//             scene->ray = ray_primary(&(scene->camera), u, v);
+//             pixel_color = ray_color1(&(scene->ray), scene->world);
+//             write_color(pixel_color, &img, i, j );
+//             ++i;
+//         }
+//         --j;
+//     }
+// 	mlx_put_image_to_window(mlx_ptr, win_ptr, img.img, 0, 0);
+// 	mlx_loop(mlx_ptr);
+// }
