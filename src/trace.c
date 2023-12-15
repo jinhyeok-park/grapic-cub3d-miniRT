@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:48:50 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/15 21:22:13 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/15 22:36:13 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,12 @@ t_color3    ray_color1(t_ray *r, t_object **obj_vector)
 			}
 		}
 	}
-    t = 0.5 * (r->direction.y + 1.0);// linear 
+    t = 0.5 * (r->direction.y + 1.0);
 	temp = color3(1, 1, 1);
 	temp2 = color3(0.5, 0.7, 1.0);
 	temp = color_multi_scala(&temp, 1.0 - t);
 	temp2 = color_multi_scala(&temp2, t);
 	return (color_plus(&temp, &temp2));
-    //return (vec_plus(vec_mult(color3(1, 1, 1), 1.0 - t), vec_mult(color3(0.5, 0.7, 1.0), t)));
 }
 
 // t_color3    ray_color(t_ray *r, t_sphere *sphere)

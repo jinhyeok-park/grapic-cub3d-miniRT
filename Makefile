@@ -6,7 +6,7 @@
 #    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 21:30:27 by jinhyeok          #+#    #+#              #
-#    Updated: 2023/12/04 16:10:56 by jinhyeok         ###   ########.fr        #
+#    Updated: 2023/12/15 22:44:30 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SOURCES = ./src/main.c\
 
 SOURCES_BONUS =
 
-INCLUDES = includes
+INCLUDES = ./includes
 
 M_OBJ = $(SOURCES:./src/.c=.o)
 B_OBJ = $(SOURCES_BONUS:./src_bonus/.c=.o)

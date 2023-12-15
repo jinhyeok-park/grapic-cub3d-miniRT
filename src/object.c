@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 03:16:26 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/04 15:18:52 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/15 22:50:07 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_object    **vector_create(void)
     return (ret);
 }
 
-t_object    *object(int type, void* ele,t_color3 albedo)
+t_object    *object(int type, void* ele, t_color3 albedo)
 {
     t_object    *ret;
 
@@ -43,6 +43,7 @@ t_object    *object(int type, void* ele,t_color3 albedo)
         ret->type = LIGHT;
     ret->size = 1;
     ret->element = ele;
+    ret->albedo = albedo;
     return (ret);
 }
 
