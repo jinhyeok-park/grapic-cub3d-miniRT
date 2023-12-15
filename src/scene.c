@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:57:22 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/04 15:56:03 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/15 22:33:02 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,36 @@
 #include "sphere.h"
 #include "light.h"
 
-t_scene	*scene_init(void)
+t_scene *scene_init3(void)
 {
-    t_scene     *ret;
-    t_point3    camera_point; // parsing 
-    t_sphere    sphere1;
-    t_sphere    sphere2;
-    t_sphere    sphere3;
-    t_object    **obj;
-    t_object    **lights;
-
-    sphere1 = sphere(point3(-2, 0, -15), 2);
-    sphere2 = sphere(point3(2, 0, -15), 2);
-    sphere3 = sphere(point3(0, -1000, 0), 994);
-    obj = vector_create();
-    lights = vector_create();
-    vector_push_back(obj, &sphere1, CIRCLE);
-    vector_push_back(obj, &sphere2, CIRCLE);
-    vector_push_back(obj, &sphere3, CIRCLE);
-
-    t_light *temp;
-    temp = light_point(point3(0,5,0), color3(1,1,1), 0.5);
-    vector_push_back(lights, temp, LIGHT);
-
-    camera_point = point3(0,0,0);
-    ret = malloc(sizeof(t_scene));
-    if (!ret)
+    t_scene *scene = malloc(sizeof(t_scene));
+    if (!scene)
         exit(1);
-    ret->canvas = canvas(1980, 1080);
-    ret->camera = camera(&(ret->canvas), camera_point);
-    ret->world = obj;
-    ret->light = lights;
+
+    scene->canvas = canvas(1980, 1080);
+
+    scene->camera = camera(&(scene->canvas), point3(0, 0, 0));
+
+    scene->world = vector_create();
+    t_sphere *circle = malloc(sizeof(t_sphere));
+    *circle = sphere(point3(-2, 0, -15), 2);
+    vector_push_back(scene->world, circle, CIRCLE);
+
+    t_sphere *circle2 = malloc(sizeof(t_sphere));
+    *circle2 = sphere(point3(2, 0, -15), 2);
+    vector_push_back(scene->world, circle2, CIRCLE);
+
+    t_sphere *circle3 = malloc(sizeof(t_sphere));
+    *circle3 = sphere(point3(0, -1000, 0), 994);
+    vector_push_back(scene->world, circle3, CIRCLE);
+
+    scene->light = vector_create();
+    t_light *temp = malloc(sizeof(t_light));
+    temp = light_point(point3(0, 5, 0), color3(1, 1, 1), 0.5);
+    vector_push_back(scene->light, temp, LIGHT);
+
     double ka = 0.1;
-    ret->ambient = color3(1 * ka, 1 * ka, 1 * ka);
-    return (ret);
+    scene->ambient = color3(1 * ka, 1 * ka, 1 * ka);
+
+    return scene;
 }
