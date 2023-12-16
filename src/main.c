@@ -322,8 +322,8 @@ int	main(int ac, char **av)
         {
             u = (double)i / (s->canvas.width - 1);
             v = (double)j / (s->canvas.height - 1);
-            ray = ray_primary(&(s->camera), u, v);
-            pixel_color = ray_color1(&ray, s->world);
+            s->ray = ray_primary(&(s->camera), u, v);
+            pixel_color = ray_color2(s);
             write_color(pixel_color, &img, i, j );
             ++i;
         }

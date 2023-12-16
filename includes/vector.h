@@ -47,5 +47,6 @@ double		vec_dot(t_vec3 *vec, t_vec3 *vec2);
 t_point3	point_move_minus(t_point3 *point, t_vec3 *vec);
 t_point3	point_move_plus(t_point3 *point, t_vec3 *vec);
 t_vec3		vec3_bypoint(t_point3 *point, t_point3 *point2);
+t_vec3      reflect(t_vec3 *v, t_vec3 *n);
 
 #endif

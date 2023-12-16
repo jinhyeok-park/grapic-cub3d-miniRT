@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:54:41 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/15 22:40:19 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/16 00:48:06 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_scene
 	t_object        **light;
 	t_color3        ambient;
 	t_hit_record    rec;
+	t_ray			ray;
 } t_scene;
 
 t_scene	*scene_init3(void);
