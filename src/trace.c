@@ -170,10 +170,14 @@ t_color3        phong_lighting(t_scene *scene)
     		t_light *light_obj = (t_light *)(lights[i]->element); // t_light 타입으로 캐스팅
     		temp = point_light_get(scene, light_obj);
     		light_color = color_plus(&temp, &light_color);
+			
 		}
 		i++;
     }
 	light_color = color_plus(&(light_color), &(scene->ambient));
+	// printf("%f ", light_color.r);
+	// 		printf("%f ", light_color.g);
+	// 		printf("%f\n", light_color.b);
 	t_color3 temp = color_multi(&light_color, &(scene->rec.albedo));
 	t_color3 temp2 = color3(1,1,1);
 	t_color3 color_ret = color_min(&temp, &temp2);

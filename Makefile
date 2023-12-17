@@ -6,7 +6,7 @@
 #    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 21:30:27 by jinhyeok          #+#    #+#              #
-#    Updated: 2023/12/15 22:44:30 by jinhyeok         ###   ########.fr        #
+#    Updated: 2023/12/17 18:00:48 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SOURCES = ./src/main.c\
 			./src/object.c\
 			./src/scene.c\
 			./src/light.c\
+			./src/parsing.c\
 
 SOURCES_BONUS =
 
