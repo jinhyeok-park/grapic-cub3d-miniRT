@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 12:24:01 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/06/08 20:35:37 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/18 15:02:16 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_list
 #  define BUFFER_SIZE 8
 # endif
 
-size_t	ft_strlen2(char *str);
+size_t	ft_strlen1(char *str);
 char	*get_next_line(int fd);
 void	free_list(t_list **list, int fd);
 int		line_alloc(char **line, t_list *list, int fd);

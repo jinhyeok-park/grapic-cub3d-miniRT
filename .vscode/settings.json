@@ -4,6 +4,8 @@
         "trace.h": "c",
         "sphere.h": "c",
         "light.h": "c",
-        "object.h": "c"
+        "object.h": "c",
+        "unistd.h": "c",
+        "fcntl.h": "c"
     }
 }

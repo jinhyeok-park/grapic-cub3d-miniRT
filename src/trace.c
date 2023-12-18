@@ -180,8 +180,13 @@ t_color3        phong_lighting(t_scene *scene)
 	// 		printf("%f\n", light_color.b);
 	t_color3 temp = color_multi(&light_color, &(scene->rec.albedo));
 	t_color3 temp2 = color3(1,1,1);
-	t_color3 color_ret = color_min(&temp, &temp2);
-    return (color_ret);
+	//t_color3 color_ret = color_min(&temp, &temp2);
+ 	// printf("%f ", color_ret.r);
+ 	// printf("%f ", color_ret.g);
+ 	// printf("%f\n", color_ret.b);
+	// exit(1);
+    // return (color_ret);
+    return (temp);
 }
 
 #include <math.h>
@@ -217,7 +222,7 @@ t_color3        point_light_get(t_scene *s, t_light *light)
 	// printf("%f ", diffuse.r);
 	// printf("%f ", diffuse.g);
 	// printf("%f\n", diffuse.b);
-	return (diffuse);
+	//return (diffuse);
 
 	view_dir = vec_multi_scala((&s->ray.direction), -1);
 	//view_dir = vunit(vmult(scene->ray.dir, -1));

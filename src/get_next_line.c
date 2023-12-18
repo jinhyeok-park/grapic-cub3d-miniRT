@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:37:03 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/04/19 01:10:28 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/18 15:02:05 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	clear_set(int enter_index, t_list **list, int fd, t_list *backup)
 	if (backup)
 	{
 		last_node = get_last_node(*list, fd, 1);
-		backup->data = (char *)malloc(ft_strlen(last_node->data) - enter_index);
+		backup->data = (char *)malloc(ft_strlen1(last_node->data) - enter_index);
 		while (last_node->data[++enter_index])
 			backup->data[i++] = last_node->data[enter_index];
 		backup->data[i] = '\0';

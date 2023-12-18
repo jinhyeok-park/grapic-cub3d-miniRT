@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 18:01:27 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/17 20:38:37 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:11:51 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 #define PARSING_H
 
 #include "vector.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "get_next_line.h"
+#include "libft.h"
+
+typedef struct s_isphere
+{
+    t_point3    center;
+    double      diameter;
+    t_color3    color;
+} t_isphere;
+
 
 typedef struct s_input 
 {
@@ -21,18 +35,12 @@ typedef struct s_input
     //camera
     //lgiht
     //sphere
-    t_sphere **sp;
+    //cylinder
+    //plane
+    t_isphere **sp;
 } t_input;
 
-typedef struct s_sphere
-{
-    t_point3    center;
-    double      diameter;
-    t_color3    color;
-} t_sphere;
+void    parsing(int ac,char ** av, t_input *input_data);
 
-
-
-void    parsing(int ac, char **av, t_input *data);
 
 #endif

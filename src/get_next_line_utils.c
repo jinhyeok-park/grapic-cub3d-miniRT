@@ -6,13 +6,13 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 23:48:39 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/04/19 01:12:31 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/18 15:01:52 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen1(char *str)
 {
 	size_t	i;
 

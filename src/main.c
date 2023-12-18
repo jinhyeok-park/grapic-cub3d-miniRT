@@ -291,16 +291,16 @@ void write_color(t_color3 pixel_color, t_data *img, int x, int y) {
 // }
 
 #include "scene.h"
-//#include "parsing.h"
+#include "parsing.h"
 
 int	main(int ac, char **av)
 {
     void    *mlx_ptr;
     void    *win_ptr;
     t_data  img;
-    //t_input input_data;
+    t_input input_data;
 
-    //parsing(ac, av, &input_data);
+    parsing(ac, av, &input_data);
     mlx_ptr = mlx_init();
     win_ptr = mlx_new_window(mlx_ptr, 1980, 1080, "miniRT canvas");
 	img.img = mlx_new_image(mlx_ptr, 1980, 1080);

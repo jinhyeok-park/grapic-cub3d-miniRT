@@ -6,7 +6,7 @@
 #    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 21:30:27 by jinhyeok          #+#    #+#              #
-#    Updated: 2023/12/18 14:53:43 by jinhyeok         ###   ########.fr        #
+#    Updated: 2023/12/18 15:03:27 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SOURCES = ./src/main.c\
 			./src/scene.c\
 			./src/light.c\
 			./src/parsing.c\
+			./src/get_next_line_utils.c\
+			./src/get_next_line.c\
 
 SOURCES_BONUS =
 
@@ -48,7 +50,7 @@ $(NAME): $(OBJECTS)
 	make -C libft
 	make -C mlx
 	cp ./mlx/libmlx.dylib ./libmlx.dylib
-	$(CC) $^ -Lft_printf -lftprintf -I./mlx -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@ -I $(INCLUDES)
+	$(CC) $^ -I./libft -Llibft -lft -I./mlx -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@ -I $(INCLUDES)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
