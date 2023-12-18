@@ -6,7 +6,7 @@
 #    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 21:30:27 by jinhyeok          #+#    #+#              #
-#    Updated: 2023/12/17 18:00:48 by jinhyeok         ###   ########.fr        #
+#    Updated: 2023/12/18 14:53:43 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	make -C ft_printf
+	make -C libft
 	make -C mlx
 	cp ./mlx/libmlx.dylib ./libmlx.dylib
 	$(CC) $^ -Lft_printf -lftprintf -I./mlx -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@ -I $(INCLUDES)
@@ -54,13 +54,12 @@ $(NAME): $(OBJECTS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make -C ft_printf clean
+	make -C libft clean
 	make -C mlx clean
 
 fclean: clean
-	make -C ft_printf fclean
+	make -C libft fclean
 	rm -rf $(NAME)
-	rm -rf ./libftprintf.a
 	rm -rf ./mlx/libmlx.dylib
 	rm -rf libmlx.dylib
 
