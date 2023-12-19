@@ -108,13 +108,10 @@ t_color3    ray_color2(t_scene *s)
 
 	rec.tmin = 0.000001;
 	rec.tmax = __DBL_MAX__;
-
 	i = -1;
-	//while ((*obj_vector)->size > ++i)
 	size = s->world[0]->size;
 	while (++i < size)
 	{
-		//if (obj_vector[i]->type == CIRCLE)
 		if (s->world[i]->type == CIRCLE)
 		{
 			t_sphere *sphere;
@@ -123,22 +120,13 @@ t_color3    ray_color2(t_scene *s)
 			if (sphere_hit(sphere, &(s->ray), &rec))
 			{
 				s->rec = rec;
-				// s->rec.albedo = s->world[i]->albedo;
-				// printf("%f", s->world[i]->albedo.r);
-				// printf("%f", s->world[i]->albedo.g);
-				// printf("%f\n", s->world[i]->albedo.b);
-				// printf("%f", s->rec.albedo.r);
-				// printf("%f", s->rec.albedo.g);
-				// printf("%f", s->rec.albedo.b);
-				// exit(1);
-				s->rec.albedo.r = 0.5;
-				s->rec.albedo.g = 0;
-				s->rec.albedo.b = 0;
+				s->rec.albedo.r = s->world[i]->albedo.r;
+				s->rec.albedo.g = s->world[i]->albedo.g;
+				s->rec.albedo.b = s->world[i]->albedo.b;
 				return (phong_lighting(s));
 			}
 		}
 	}
-	//exit(1);
     t = 0.5 * (s->ray.direction.y + 1.0);
 	temp = color3(1, 1, 1);
 	temp2 = color3(0.5, 0.7, 1.0);
@@ -175,18 +163,50 @@ t_color3        phong_lighting(t_scene *scene)
 		i++;
     }
 	light_color = color_plus(&(light_color), &(scene->ambient));
-	// printf("%f ", light_color.r);
-	// 		printf("%f ", light_color.g);
-	// 		printf("%f\n", light_color.b);
+	if (light_color.r == 0 && light_color.g == 0 && light_color.b == 0)
+		printf("hit");
+	
 	t_color3 temp = color_multi(&light_color, &(scene->rec.albedo));
+	// if (light_color.r < 0.2 || light_color.g < 0.2 || light_color.b < 0.2)
+	// {
+	// 	printf("%f ", light_color.r);
+	//  	printf("%f ", light_color.g);
+	//  	printf("%f\n", light_color.b);
+	// }
+	 
+	if (temp.r == 0 && temp.g == 0 && temp.b == 0)
+		printf("hii");
+
+
+	if (scene->rec.albedo.r == 0 && scene->rec.albedo.g == 0 && scene->rec.albedo.b == 0)
+	{
+		printf("hit");
+	// printf("%f ", scene->rec.albedo.r);
+	// printf("%f ", scene->rec.albedo.g);
+	// printf("%f\n", scene->rec.albedo.b);
+	}
+
 	t_color3 temp2 = color3(1,1,1);
-	//t_color3 color_ret = color_min(&temp, &temp2);
+	// t_color3 color_ret = color_min(&temp, &temp2);
+	t_color3 color_ret = color_min_val(&temp, &temp2);
+	// if (color_ret.r == 0 && color_ret.g == 0 && color_ret.b == 0)
+	// {
+	// 	printf("temp ");
+	// 	printf("%f ", temp.r);
+	// 	printf("%f ", temp.g);
+	// 	printf("%f\n", temp.b);
+	// 	printf("temp2 ");
+	// 	printf("%f ", temp2.r);
+	// 	printf("%f ", temp2.g);
+	// 	printf("%f\n", temp2.b);
+	// }
+
  	// printf("%f ", color_ret.r);
  	// printf("%f ", color_ret.g);
  	// printf("%f\n", color_ret.b);
 	// exit(1);
-    // return (color_ret);
-    return (temp);
+    return (color_ret);
+    // return (temp2);
 }
 
 #include <math.h>
@@ -212,17 +232,31 @@ t_color3        point_light_get(t_scene *s, t_light *light)
 	// printf("%f ", s->rec.p.y);
 	// printf("%f", s->rec.p.z);
 	temp = vec3_bypoint((&light->origin), &(s->rec.p));
+	// temp = vec3_bypoint(&(s->rec.p), (&light->origin));
     //light_dir = vunit(vminus(light->origin, scene->rec.p)); //교점에서 출발하여 광원을 향하는 벡터(정규화 됨)
 	light_dir = vec_unit(&temp);
     // cosΘ는 Θ 값이 90도 일 때 0이고 Θ가 둔각이 되면 음수가 되므로 0.0보다 작은 경우는 0.0으로 대체한다.
     //kd = fmax(vdot(scene->rec.normal, light_dir), 0.0);// (교점에서 출발하여 광원을 향하는 벡터)와 (교점에서의 법선벡터)의 내적값.
 	kd = vec_dot((&s->rec.normal), &light_dir);
+
+	if (kd < 0)
+	{
+		// printf("rec normal ");
+		// printf("%f ", s->rec.normal.x);
+		// printf("%f ", s->rec.normal.y);
+		// printf("%f\n", s->rec.normal.z);
+		// printf("light  normal ");
+		// printf("%f ", light_dir.x);
+		// printf("%f ", light_dir.y);
+		// printf("%f\n", light_dir.z);
+		// kd *= -1;
+	}
 	kd = fmax(kd, 0.0);
 	diffuse = color_multi_scala(&(light->light_color), kd);
 	// printf("%f ", diffuse.r);
 	// printf("%f ", diffuse.g);
 	// printf("%f\n", diffuse.b);
-	//return (diffuse);
+	// return (diffuse);
 
 	view_dir = vec_multi_scala((&s->ray.direction), -1);
 	//view_dir = vunit(vmult(scene->ray.dir, -1));

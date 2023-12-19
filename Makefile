@@ -6,12 +6,12 @@
 #    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 21:30:27 by jinhyeok          #+#    #+#              #
-#    Updated: 2023/12/18 15:03:27 by jinhyeok         ###   ########.fr        #
+#    Updated: 2023/12/18 17:15:43 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 SOURCES = ./src/main.c\
 			./src/vector.c\
 			./src/vector2.c\

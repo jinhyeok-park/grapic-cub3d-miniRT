@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:57:22 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/16 03:25:24 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/18 21:21:38 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_scene *scene_init3(void)
 
     scene->canvas = canvas(1980, 1080);
 
-    scene->camera = camera(&(scene->canvas), point3(0, 0, 0));
+    scene->camera = camera(&(scene->canvas), point3(0, 0, -10));
 
     scene->world = vector_create();
     t_sphere *circle = malloc(sizeof(t_sphere));
@@ -43,7 +43,7 @@ t_scene *scene_init3(void)
 
     scene->light = vector_create();
     t_light *temp = malloc(sizeof(t_light));
-    temp = light_point(point3(0, 5, 0), color3(1, 1, 1), 0.5);
+    temp = light_point(point3(-5, 5, -5), color3(1, 1, 1), 0.5);
     vector_push_back(scene->light, temp, LIGHT);
 
     double ka = 0.1;

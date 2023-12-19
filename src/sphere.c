@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 20:14:51 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/16 01:37:13 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:46:44 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,19 @@ t_bool  sphere_hit(t_sphere *sphere, t_ray *ray, t_hit_record *rec)
         return (FALSE);
     double sqrtd = (double)sqrt(dicrintmant);
     double root = (- b - sqrtd) / a;
+    //root = (- b + sqrtd) / a;
     if (root < rec->tmin || rec->tmax < root)
     {
-     root = (- b + sqrtd) / a;
-     if (root < rec->tmin || rec->tmax < root)
-          return (FALSE);
+        root = (- b + sqrtd) / a;
+        printf("hit");
+        if (root < rec->tmin || rec->tmax < root)
+            return (FALSE);
     }
     rec->t = root;
     rec->p = ray_headpoint(ray, root);
+    if (rec->p.x < 0 || rec->p.y || rec->p.z < 0) 
+    {
+    }
     rec->normal = vec3_bypoint(&(rec->p), &(sphere->center));
     rec->normal = vec_divide_scala(&(rec->normal), sphere->radius);
     set_face_normal(ray, rec);
