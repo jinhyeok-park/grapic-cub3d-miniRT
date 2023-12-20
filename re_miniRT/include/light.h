@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color3.h                                           :+:      :+:    :+:   */
+/*   light.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 14:36:34 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/20 13:59:05 by jinhyeok         ###   ########.fr       */
+/*   Created: 2023/12/20 13:12:47 by jinhyeok          #+#    #+#             */
+/*   Updated: 2023/12/20 13:14:13 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR3_H
-#define COLOR3_H
+#ifndef LIGHT_H
+#define LIGHT_H
 
-typedef struct s_color3
+#include "color3.h"
+#include "vector3.h"
+
+typedef struct      s_light
 {
-    double  r;
-    double  g;
-    double  b;
-} t_color3;
+    t_point3    origin;
+    t_color3    light_color;
+    double      bright_ratio;
+} t_light;
 
-t_color3    color3(double r, double g, double b);
-t_color3      cplus(t_color3 vec, t_color3 vec2);
-t_color3      cmult(t_color3 vec, double t);
-t_color3        cmult_(t_color3 vec, t_color3 col);
-t_color3        cmin(t_color3 vec1, t_color3 vec2);
+t_light     *light_point(t_point3 light_origin, t_color3 light_color, double bright_ratio);
 
 #endif

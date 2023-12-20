@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:26:23 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/19 20:15:44 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:22:44 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,8 @@
 //#include "sphere.h"
 #include "camera.h"
 #include "trace.h"
+#include "object.h"
+#include "scene.h"
+
 
 #endif

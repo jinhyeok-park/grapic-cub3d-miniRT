@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:49:36 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/19 14:57:05 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:51:06 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ double      vdot(t_vec3 vec, t_vec3 vec2);
 t_vec3      vcross(t_vec3 vec, t_vec3 vec2);
 t_vec3      vunit(t_vec3 vec);
 t_vec3      vmin(t_vec3 vec1, t_vec3 vec2);
+t_vec3      reflect(t_vec3 v, t_vec3 n);
 
 #endif

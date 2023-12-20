@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:25:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/19 20:15:57 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:40:49 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main(int ac, char **av)
     t_canvas    canv;
     t_camera    cam;
     t_ray       ray;
+    t_scene     s;
 
     canv = canvas(1000, 800);
     cam = camera(&canv, point3(0, 0, 0));
@@ -39,9 +40,7 @@ int main(int ac, char **av)
     double  g;
     double  b;
 
-    t_sphere    sp;
-    sp = sphere(point3(0, 0, -5), 2);
-
+    scene_init(&s);
     t_color3 test;
     j = canv.height - 1;
 
@@ -54,7 +53,10 @@ int main(int ac, char **av)
             v = (double)j / (canv.height - 1);
             ray = ray_primary(&cam, u, v);
             // test = ray_color(&ray);
-            test = ray_color(&ray, &sp);
+            //test = ray_color(&ray, obj);
+            //printf("%d", s.world[0]->size);
+            s.ray = ray;
+            test = ray_color(&s);
             write_color(test, &img, i, canv.height - 1 - j);
             ++i;
         }

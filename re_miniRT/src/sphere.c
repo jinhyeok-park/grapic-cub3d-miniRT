@@ -6,20 +6,21 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:54:38 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/19 21:01:31 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:45:37 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sphere.h"
 #include "trace.h"
 
-t_sphere sphere(t_point3 center, double radius)
+t_sphere *sphere(t_point3 center, double radius)
 {
-    t_sphere ret;
+    t_sphere *ret;
     
-    ret.center = center;
-    ret.radius = radius;
-    ret.radius2 = radius * radius;
+    ret = malloc(sizeof(t_sphere));
+    ret->center = center;
+    ret->radius = radius;
+    ret->radius2 = radius * radius;
     return (ret);
 }
 

@@ -5,24 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 03:16:26 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/20 12:44:06 by jinhyeok         ###   ########.fr       */
+/*   Created: 2023/12/20 12:23:41 by jinhyeok          #+#    #+#             */
+/*   Updated: 2023/12/20 14:05:25 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
-#include "vector.h"
-#include <stdio.h>
-#include "light.h"
+#include "commontype.h"
 
-t_object    **vector_create(void)
+t_object **create_object(void)
 {
-    t_object **ret;
-    int     i;
-
-    ret = (t_object **)malloc(sizeof(t_object *) * VECTORSIZE);
+    int         i;
+    t_object    **ret;
+    
+    ret = (t_object **)malloc(sizeof(t_object *) * OBJECTSIZE);
     i = 0;
-    while (i < VECTORSIZE)
+    while (i < OBJECTSIZE)
     {
         ret[i] = NULL;
         i++;
@@ -30,6 +28,7 @@ t_object    **vector_create(void)
     return (ret);
 }
 
+//t_object    *object(int type, void* ele)
 t_object    *object(int type, void* ele, t_color3 albedo)
 {
     t_object    *ret;
@@ -47,7 +46,7 @@ t_object    *object(int type, void* ele, t_color3 albedo)
     return (ret);
 }
 
-void    vector_push_back(t_object **vector, void *ele, int type)
+void    object_add(t_object **vector, void *ele, int type, t_color3 albedo)
 {
     t_object *temp;
 
@@ -63,6 +62,7 @@ void    vector_push_back(t_object **vector, void *ele, int type)
     else if (type == LIGHT)
         temp->type = LIGHT;
     temp->element = ele;
+    temp->albedo = albedo;
     if ((*vector))
     {
         vector[(*vector)->size] = temp;
@@ -73,4 +73,4 @@ void    vector_push_back(t_object **vector, void *ele, int type)
         temp->size = 1;
         vector[0] = temp;
     }
-// }
+}

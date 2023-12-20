@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color3.h                                           :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 14:36:34 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/20 13:59:05 by jinhyeok         ###   ########.fr       */
+/*   Created: 2023/12/20 13:01:00 by jinhyeok          #+#    #+#             */
+/*   Updated: 2023/12/20 14:46:05 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR3_H
-#define COLOR3_H
+#ifndef SCENE_H
+#define SCENE_H
 
-typedef struct s_color3
+#include "camera.h"
+#include "object.h"
+#include "color3.h"
+#include "record.h"
+#include "ray.h"
+#include "light.h"
+
+
+typedef struct s_scene
 {
-    double  r;
-    double  g;
-    double  b;
-} t_color3;
+    t_canvas        canvas;
+    t_camera        camera;
+    t_object        **world;
+    t_object        **light;
+    t_color3        ambient;
+    t_ray           ray;
+    t_hit_record    rec;
+} t_scene;
 
-t_color3    color3(double r, double g, double b);
-t_color3      cplus(t_color3 vec, t_color3 vec2);
-t_color3      cmult(t_color3 vec, double t);
-t_color3        cmult_(t_color3 vec, t_color3 col);
-t_color3        cmin(t_color3 vec1, t_color3 vec2);
+void    scene_init(t_scene *s);
 
 #endif

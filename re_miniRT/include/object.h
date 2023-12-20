@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   record.h                                           :+:      :+:    :+:   */
+/*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 20:40:18 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/20 14:00:00 by jinhyeok         ###   ########.fr       */
+/*   Created: 2023/12/20 12:21:03 by jinhyeok          #+#    #+#             */
+/*   Updated: 2023/12/20 14:05:42 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RECORD_H
-#define RECORD_H
+#ifndef OBJECT_H
+#define OBJECT_H
 
-#include "commontype.h"
-#include "vector3.h"
+#define OBJECTSIZE 100
+#define CIRCLE 1
+#define LIGHT 2
+#include <stdlib.h>
 #include "color3.h"
 
-typedef struct s_hit_record t_hit_record;
-
-struct s_hit_record
+typedef struct s_object
 {
-    t_point3    p;
-    t_vec3      normal;
-    double      tmin;
-    double      tmax;
-    double      t;
-    t_bool      front_face;
+    int         type;
+    int         size;
+    void        *element;
     t_color3    albedo;
-};
+} t_object ;
 
-t_hit_record record_init(void);
+t_object **create_object(void);
+t_object    *object(int type, void* ele, t_color3 albedo);
+void    object_add(t_object **vector, void *ele, int type, t_color3 albedo);
+// void    object_add(t_object **vector, void *ele, int type);
 
 #endif

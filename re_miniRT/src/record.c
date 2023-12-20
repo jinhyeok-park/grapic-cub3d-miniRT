@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color3.h                                           :+:      :+:    :+:   */
+/*   record.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 14:36:34 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/20 13:59:05 by jinhyeok         ###   ########.fr       */
+/*   Created: 2023/12/20 13:45:04 by jinhyeok          #+#    #+#             */
+/*   Updated: 2023/12/20 13:45:22 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR3_H
-#define COLOR3_H
+#include "record.h"
 
-typedef struct s_color3
+t_hit_record record_init(void)
 {
-    double  r;
-    double  g;
-    double  b;
-} t_color3;
+    t_hit_record    record;
 
-t_color3    color3(double r, double g, double b);
-t_color3      cplus(t_color3 vec, t_color3 vec2);
-t_color3      cmult(t_color3 vec, double t);
-t_color3        cmult_(t_color3 vec, t_color3 col);
-t_color3        cmin(t_color3 vec1, t_color3 vec2);
-
-#endif
+    record.tmin = 0.00001;
+    record.tmax = INFINITY;
+    return (record);
+}
