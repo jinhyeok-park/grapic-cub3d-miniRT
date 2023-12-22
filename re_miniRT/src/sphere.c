@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:54:38 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/20 12:45:37 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:23:39 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,15 @@ t_sphere *sphere(t_point3 center, double radius)
 
 t_bool      hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
 {
-        t_vec3  oc;
-        double  a;
-        double  b;
-        double  c;
-        double  discriminant;
-        double  sqrtd;
+    t_vec3  oc;
+    double  a;
+    double  b;
+    double  c;
+    double  discriminant;
+    double  sqrtd;
     double  root;
 
-        oc = vminus(ray->orig, sp->center);
-    //     a = vdot(ray->dir, ray->dir);
-    //     b = 2.0 * vdot(oc, ray->dir);
-    //     c = vdot(oc, oc) - sp->radius2;
-    // // if (discriminant < 0) // 판별식이 0보다 작을 때 : 실근 없을 때,
-    //     return (-1.0);
-    // else
-    //     return ((-b - sqrt(discriminant)) / (2.0 * a));
-
+    oc = vminus(ray->orig, sp->center);
     a = vlength2(ray->dir);
     b = vdot(oc, ray->dir);
     c = vlength2(oc) - sp->radius2;
@@ -71,10 +63,8 @@ void    set_face_normal(t_ray *r, t_hit_record *rec)
         rec->front_face = -1;
     else
         rec->front_face = 1;
-    //rec->front_face = vdot(r->dir, rec->normal) < 0;
     if (rec->front_face)
         rec->normal = rec->normal;
     else
         rec->normal = vmult(rec->normal, -1);
-    //rec->normal = (rec->front_face) ? rec->normal : vmult(rec->normal, -1);
 }

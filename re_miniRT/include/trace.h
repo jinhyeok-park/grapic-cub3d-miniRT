@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:04:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/20 14:46:10 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:22:33 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,12 @@ t_color3        phong_lighting(t_scene *scene);
 t_color3        point_light_get(t_scene *scene, t_light *light);
 
 
+//t_bool  hit_divide(int index, t_scene *s);
+t_bool  hit(t_scene *s, t_ray *ray, t_hit_record *rec);
+t_bool  hit_divide(int index, t_scene *s, t_ray *ray, t_hit_record *rec);
+t_bool  is_shadow(t_scene *s, t_light *light);
+//t_bool      hit(t_scene *s);
+// t_bool      hit_obj(t_object *obj, t_ray *ray, t_hit_record *rec);
+// t_bool      hit_sphere(t_object *world, t_ray *ray, t_hit_record *rec);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:21:03 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/20 14:05:42 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/22 14:28:47 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #define OBJECTSIZE 100
 #define CIRCLE 1
 #define LIGHT 2
+#define PLANE 3
 #include <stdlib.h>
 #include "color3.h"
 
