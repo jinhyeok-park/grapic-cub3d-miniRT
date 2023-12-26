@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:23:41 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/20 14:05:25 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/26 15:34:07 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ void    object_add(t_object **vector, void *ele, int type, t_color3 albedo)
         temp->type = CIRCLE;
     else if (type == LIGHT)
         temp->type = LIGHT;
+    else if (type == PLANE)
+        temp->type = PLANE;
+    else
+        temp->type = -1;
     temp->element = ele;
     temp->albedo = albedo;
     if ((*vector))

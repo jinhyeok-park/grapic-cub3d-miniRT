@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:03:40 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/22 15:30:20 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/26 20:49:19 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,10 +171,12 @@ t_color3    ray_color(t_scene *s)
 
 t_bool  hit(t_scene *s, t_ray *ray, t_hit_record *rec)
 {
-    int i;
-    int size;
+    int     i;
+    int     size;
+    t_bool  hit;
 
     i = 0;
+    hit = FALSE;
     if (s && s->world && s->world[0])
         size = s->world[0]->size;
     else
@@ -185,32 +187,71 @@ t_bool  hit(t_scene *s, t_ray *ray, t_hit_record *rec)
     while (i < size)
     {
         if (hit_divide(i, s, ray, rec))
-            return (TRUE);
+            hit = TRUE;
         i++;
     }
-    return (FALSE);
+    return (hit);
 }
+#include "plane.h"
 
-t_bool  hit_divide(int index, t_scene *s, t_ray *ray, t_hit_record *rec)
+// t_bool  hit_divide(int index, t_scene *s, t_ray *ray, t_hit_record *rec)
+// {
+//     t_bool hit;
+
+//     hit = FALSE;
+//     if (s->world[index]->type == CIRCLE)
+//     {
+//         if (hit_sphere((void *)s->world[index]->element, ray, rec))
+//             hit = TRUE;
+//     }
+//     else if (s->world[index]->type == PLANE)
+//     {
+//         if(hit_plane((void *)s->world[index]->element, ray, rec))
+//         {
+//             hit = TRUE;
+//         }
+//     }
+//     if (hit)
+//     {
+//         s->rec.albedo.r = s->world[index]->albedo.r;
+//         s->rec.albedo.g = s->world[index]->albedo.g;
+//         s->rec.albedo.b = s->world[index]->albedo.b;
+//         return (TRUE);
+//     }
+//     return (FALSE);
+// }
+
+t_bool hit_divide(int index, t_scene *s, t_ray *ray, t_hit_record *rec)
 {
-    t_bool hit;
+    t_bool      hit = FALSE;
+    t_hit_record local_rec;
 
-    hit = FALSE;
+    local_rec = record_init();
     if (s->world[index]->type == CIRCLE)
     {
-        if (hit_sphere((void *)s->world[index]->element, ray, rec))
+        if (hit_sphere((void *)s->world[index]->element, ray, &local_rec))
             hit = TRUE;
-        // else if (hit_plane)
-        // else if (hit_cy)
-        if (hit)
-        {
-            s->rec.albedo.r = s->world[index]->albedo.r;
-            s->rec.albedo.g = s->world[index]->albedo.g;
-            s->rec.albedo.b = s->world[index]->albedo.b;
-            return (TRUE);
-        }
     }
-    return (FALSE);
+    // else if (s->world[index]->type == PLANE)
+    // {
+    //     if (hit_plane((void *)s->world[index]->element, ray, &local_rec))
+    //         hit = TRUE;
+    // }
+
+    if (hit && local_rec.t < rec->t)
+    {
+        rec->t = local_rec.t;
+        rec->p = local_rec.p;
+        rec->normal = local_rec.normal;
+
+        rec->albedo.r = s->world[index]->albedo.r;
+        rec->albedo.g = s->world[index]->albedo.g;
+        rec->albedo.b = s->world[index]->albedo.b;
+
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 t_color3        phong_lighting(t_scene *scene)
@@ -239,7 +280,13 @@ t_color3        phong_lighting(t_scene *scene)
     //         light_color = vplus(light_color, point_light_get(scene, lights->element));
     //     lights = lights->next;
     // }
+    // printf("%f", light_color.r);
+    // printf("%f", light_color.g);
+    // printf("%f", light_color.b);
     light_color = cplus(light_color, scene->ambient);
+    // printf("%f ", scene->rec.albedo.r);
+    // printf("%f ", scene->rec.albedo.g);
+    // printf("%f\n", scene->rec.albedo.b);
     return (cmin(cmult_(light_color, scene->rec.albedo), color3(1, 1, 1)));
     //모든 광원에 의한 빛의 양을 구한 후, 오브젝트의 반사율과 곱해준다. 그 값이 (1, 1, 1)을 넘으면 (1, 1, 1)을 반환한다.
 }
@@ -261,7 +308,10 @@ t_color3        point_light_get(t_scene *scene, t_light *light)
     double      brightness;
 
     if (is_shadow(scene, light))
+    {
+        printf("hit");
         return (color3(0,0,0));
+    }
     light_dir = vunit(vminus(light->origin, scene->rec.p)); //교점에서 출발하여 광원을 향하는 벡터(정규화 됨)
     // cosΘ는 Θ 값이 90도 일 때 0이고 Θ가 둔각이 되면 음수가 되므로 0.0보다 작은 경우는 0.0으로 대체한다.
     kd = fmax(vdot(scene->rec.normal, light_dir), 0.0);// (교점에서 출발하여 광원을 향하는 벡터)와 (교점에서의 법선벡터)의 내적값.
@@ -282,9 +332,13 @@ t_bool  is_shadow(t_scene *s, t_light *light)
     double  light_len;
     t_ray   light_ray;
 
+    printf("%f ", s->rec.p.x);
+    printf("%f ", s->rec.p.y);
+    printf("%f\n", s->rec.p.z);
     light_dir = vminus(light->origin, s->rec.p);
     light_len = vlength(light_dir);
-    light_ray = ray(vplus(s->rec.p, vmult(s->rec.normal, 0.000001)), light_dir);
+    light_dir = vunit(light_dir);
+    light_ray = ray(vplus(s->rec.p, vmult(s->rec.normal, -1)), light_dir);
     t_hit_record light_rec;
 
     light_rec.tmin = 0;
