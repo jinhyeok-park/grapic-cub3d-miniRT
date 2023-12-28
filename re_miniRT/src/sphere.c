@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:54:38 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/20 15:23:39 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:42:57 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,19 @@ t_bool      hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
     if (discriminant < 0)
         return (FALSE);
     sqrtd = sqrt(discriminant);
-  root = (-b - sqrtd) / a;
-  if (root < rec->tmin || rec->tmax < root)
-  {
-     root = (-b + sqrtd) / a;
-      if (root < rec->tmin || rec->tmax < root)
-         return (FALSE);
-  }
-  rec->t = root;
-  rec->p = ray_at(ray, root);
- rec->normal = vdivide(vminus(rec->p, sp->center), sp->radius); // 정규화된 법선 벡터.
-  set_face_normal(ray, rec); // rec의 법선벡터와 광선의 방향벡터를 비교해서 앞면인지 뒷면인지 t_bool 값으로 저장.
-  return (TRUE);
+    root = (-b - sqrtd) / a;
+    if (root < rec->tmin || rec->tmax < root)
+    {
+        root = (-b + sqrtd) / a;
+        if (root < rec->tmin || rec->tmax < root)
+            return (FALSE);
+    }
+
+    rec->t = root;
+    rec->p = ray_at(ray, root);
+    rec->normal = vdivide(vminus(rec->p, sp->center), sp->radius); // 정규화된 법선 벡터.
+    set_face_normal(ray, rec); // rec의 법선벡터와 광선의 방향벡터를 비교해서 앞면인지 뒷면인지 t_bool 값으로 저장.
+    return (TRUE);
 }
 
 void    set_face_normal(t_ray *r, t_hit_record *rec)

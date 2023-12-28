@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:03:40 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/26 20:49:19 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/28 23:52:21 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ t_ray       ray_primary(t_camera *cam, double u, double v)
 //     t = 0.5 * (s->ray.dir.y + 1.0);
 //     return (cplus(cmult(color3(1, 1, 1), 1.0 - t), cmult(color3(0.5, 0.7, 1.0), t)));
 // }
-// t_bool  hit(t_scene *s, t_ray *ray, t_hit_record *rec)
+
+// t_bool  hit1(t_scene *s, t_ray *ray, t_hit_record *rec)
 // {
 //     int i;
 //     int size;
@@ -128,14 +129,14 @@ t_ray       ray_primary(t_camera *cam, double u, double v)
 //     }
 //     while (i < size)
 //     {
-//         if (hit_divide(i, s))
+//         if (hit_divide1(i, s))
 //             return (TRUE);
 //         i++;
 //     }
 //     return (FALSE);
 // }
 
-// t_bool  hit_divide(int index, t_scene *s)
+// t_bool  hit_divide1(int index, t_scene *s)
 // {
 //     t_bool hit;
 
@@ -160,7 +161,6 @@ t_ray       ray_primary(t_camera *cam, double u, double v)
 t_color3    ray_color(t_scene *s)
 {
     double      t;
-    t_vec3      n;
 
     s->rec = record_init();
     if (hit(s, &(s->ray), &(s->rec)))
@@ -232,11 +232,11 @@ t_bool hit_divide(int index, t_scene *s, t_ray *ray, t_hit_record *rec)
         if (hit_sphere((void *)s->world[index]->element, ray, &local_rec))
             hit = TRUE;
     }
-    // else if (s->world[index]->type == PLANE)
-    // {
-    //     if (hit_plane((void *)s->world[index]->element, ray, &local_rec))
-    //         hit = TRUE;
-    // }
+    else if (s->world[index]->type == PLANE)
+    {
+        if (hit_plane((void *)s->world[index]->element, ray, &local_rec))
+            hit = TRUE;
+    }
 
     if (hit && local_rec.t < rec->t)
     {
@@ -309,7 +309,6 @@ t_color3        point_light_get(t_scene *scene, t_light *light)
 
     if (is_shadow(scene, light))
     {
-        printf("hit");
         return (color3(0,0,0));
     }
     light_dir = vunit(vminus(light->origin, scene->rec.p)); //교점에서 출발하여 광원을 향하는 벡터(정규화 됨)
@@ -332,18 +331,17 @@ t_bool  is_shadow(t_scene *s, t_light *light)
     double  light_len;
     t_ray   light_ray;
 
-    printf("%f ", s->rec.p.x);
-    printf("%f ", s->rec.p.y);
-    printf("%f\n", s->rec.p.z);
     light_dir = vminus(light->origin, s->rec.p);
     light_len = vlength(light_dir);
     light_dir = vunit(light_dir);
-    light_ray = ray(vplus(s->rec.p, vmult(s->rec.normal, -1)), light_dir);
+    light_ray = ray(vplus(s->rec.p, vmult(s->rec.normal, 0.01)), light_dir);
+
     t_hit_record light_rec;
 
-    light_rec.tmin = 0;
+    light_rec.tmin = 0.01;
+    light_rec.t = light_len;
     light_rec.tmax = light_len;
     if (hit(s, &light_ray, &light_rec))
-        return (TRUE);
+       return (TRUE);   
     return (FALSE);
 }

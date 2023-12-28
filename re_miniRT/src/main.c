@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:25:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/22 13:47:51 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:10:24 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int main(int ac, char **av)
     win_ptr = mlx_new_window(mlx_ptr, 1000, 800, "miniRT canvas");
 	img.img = mlx_new_image(mlx_ptr, 1000, 800);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-
     
     t_ray       ray;
     t_scene     s;
@@ -42,9 +41,6 @@ int main(int ac, char **av)
     int     j;
     double  u;
     double  v;
-    double  r;
-    double  g;
-    double  b;
 
     scene_init(&s);
     t_color3 test;

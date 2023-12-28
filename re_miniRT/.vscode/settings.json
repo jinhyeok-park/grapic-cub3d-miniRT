@@ -4,6 +4,9 @@
         "vector3.h": "c",
         "minirt.h": "c",
         "scene.h": "c",
-        "light.h": "c"
+        "light.h": "c",
+        "record.h": "c",
+        "ray.h": "c",
+        "color3.h": "c"
     }
 }
