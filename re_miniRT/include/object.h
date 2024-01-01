@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:21:03 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/22 14:28:47 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/01 12:35:34 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #define CIRCLE 1
 #define LIGHT 2
 #define PLANE 3
+#define CYLINDER 4
 #include <stdlib.h>
 #include "color3.h"
 

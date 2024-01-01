@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:23:41 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/26 15:34:07 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/01 13:18:00 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void    object_add(t_object **vector, void *ele, int type, t_color3 albedo)
         temp->type = LIGHT;
     else if (type == PLANE)
         temp->type = PLANE;
+	else if (type == CYLINDER)
+		temp->type = CYLINDER;
     else
         temp->type = -1;
     temp->element = ele;

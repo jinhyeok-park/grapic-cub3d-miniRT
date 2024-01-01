@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:04:39 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/27 18:53:59 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/01 12:35:21 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "sphere.h"
 #include "light.h"
 #include "plane.h"
+#include "cylinder.h"
 
 void    scene_init(t_scene *s)
 {
@@ -34,6 +35,7 @@ void    scene_init(t_scene *s)
     sp2= sphere(point3(0, -1000, 0), 996);
     p = plane(point3(0,-20,0), vec3(0,0.5,0));
     p1 = plane(point3(0,0,-10), vec3(0,0,0.5));
+	t_cylinder *cy = cylinder(point3(0, 0, -10), 2, 8);
     t_object **obj;
     
     obj = create_object();
@@ -42,6 +44,7 @@ void    scene_init(t_scene *s)
     object_add(obj, sp, CIRCLE, color3(0.5, 0, 0));
     object_add(obj, sp1, CIRCLE, color3(0, 0.5, 0));
     // object_add(obj, sp2, CIRCLE, color3(1, 1, 1));
+	object_add(obj, cy, CYLINDER, color3(1, 0, 0));
 
     lights = create_object();
     s->world = obj;

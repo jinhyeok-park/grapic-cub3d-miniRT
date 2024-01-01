@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   trace.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:03:40 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/28 23:52:21 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/01 13:49:49 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "trace.h"
 #include "sphere.h"
-
+#include "cylinder.h"
 
 t_ray       ray(t_point3 orig, t_vec3 dir)
 {
@@ -237,6 +237,11 @@ t_bool hit_divide(int index, t_scene *s, t_ray *ray, t_hit_record *rec)
         if (hit_plane((void *)s->world[index]->element, ray, &local_rec))
             hit = TRUE;
     }
+	else if (s->world[index]->type == CYLINDER)
+	{
+		if (hit_cylinder((void *)s->world[index]->element, ray, &local_rec))
+			hit = TRUE;
+	}
 
     if (hit && local_rec.t < rec->t)
     {
