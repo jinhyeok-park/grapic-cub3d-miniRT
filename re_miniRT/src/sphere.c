@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:54:38 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/27 14:42:57 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:44:01 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_bool      hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
         if (root < rec->tmin || rec->tmax < root)
             return (FALSE);
     }
-
     rec->t = root;
     rec->p = ray_at(ray, root);
     rec->normal = vdivide(vminus(rec->p, sp->center), sp->radius); // 정규화된 법선 벡터.

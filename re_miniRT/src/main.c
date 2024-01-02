@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:25:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2023/12/27 14:10:24 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/02 19:06:07 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int main(int ac, char **av)
             // test = ray_color(&ray);
             //test = ray_color(&ray, obj);
             //printf("%d", s.world[0]->size);
+            // printf("%f, %f \n", u, v);
             s.ray = ray;
             test = ray_color(&s);
             write_color(test, &img, i, s.canvas.height - 1 - j);

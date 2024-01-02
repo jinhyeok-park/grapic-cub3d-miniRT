@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+         #
+#    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:24:31 by jinhyeok          #+#    #+#              #
-#    Updated: 2023/12/31 10:41:29 by minjcho          ###   ########.fr        #
+#    Updated: 2024/01/02 19:18:41 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 SOURCES = ./src/main.c\
 			./src/color3.c\
 			./src/pixel.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:03:40 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/01 13:49:49 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/02 11:08:34 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,18 +335,62 @@ t_bool  is_shadow(t_scene *s, t_light *light)
     t_vec3  light_dir;
     double  light_len;
     t_ray   light_ray;
+    int     i;
 
-    light_dir = vminus(light->origin, s->rec.p);
-    light_len = vlength(light_dir);
-    light_dir = vunit(light_dir);
-    light_ray = ray(vplus(s->rec.p, vmult(s->rec.normal, 0.01)), light_dir);
+    light_dir = vminus(light->origin, s->rec.p); // 객체의 빛이 도달한 지점에서 광원까지
+    light_len = vlength(light_dir); // 광원가지의 거리 
+    light_dir = vunit(light_dir); // hit지점에서 광원까지 unit
+    light_ray = ray(vplus(s->rec.p, vmult(s->rec.normal, 0.01)), light_dir);// hit지점보다 살짝 위
+    
 
     t_hit_record light_rec;
 
-    light_rec.tmin = 0.01;
+    light_rec.tmin = 0.00001;
     light_rec.t = light_len;
     light_rec.tmax = light_len;
-    if (hit(s, &light_ray, &light_rec))
-       return (TRUE);   
+    i = 0;
+    while (i < s->world[0]->size)
+    {
+        if (s->world[i]->type == CIRCLE)
+        {
+            if (hit_sphere((void *)s->world[i]->element, &light_ray, &light_rec))
+                return TRUE;
+        }
+        else if (s->world[i]->type == PLANE)
+        {
+            if (hit_plane((void *)s->world[i]->element, &light_ray, &light_rec))
+                return TRUE;
+        }
+	    else if (s->world[i]->type == CYLINDER)
+	    {
+		    if (hit_cylinder((void *)s->world[i]->element, &light_ray, &light_rec))
+                return (TRUE);
+    	}
+        i++;
+    }
     return (FALSE);
 }
+
+// t_bool  is_shadow(t_scene *s, t_light *light)
+// {
+//     t_vec3  light_dir;
+//     double  light_len;
+//     t_ray   light_ray;
+
+//     light_dir = vminus(light->origin, s->rec.p); // 객체의 빛이 도달한 지점에서 광원까지
+//     light_len = vlength(light_dir); // 광원가지의 거리 
+//     light_dir = vunit(light_dir); // hit지점에서 광원까지 unit
+//     light_ray = ray(vplus(s->rec.p, vmult(s->rec.normal, 0.01)), light_dir);// hit지점보다 살짝 위
+    
+
+//     t_hit_record light_rec;
+
+//     light_rec.tmin = 0.00001;
+//     light_rec.t = light_len;
+//     light_rec.tmax = light_len;
+
+    
+//     if (hit(s, &light_ray, &light_rec))
+//        return (TRUE);   
+//     return (FALSE);
+// }
