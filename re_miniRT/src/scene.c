@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:04:39 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/02 19:46:26 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/02 21:03:25 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void    scene_init(t_scene *s)
     sp = sphere(point3(1, 0, -10), 2);
     sp1 = sphere(point3(-1, 0, -10), 2);
     sp2= sphere(point3(0, -1000, 0), 996);
-    temp = vec3(0, 0.5, 0);
+    temp = vec3(0, 1, 0);
     temp = vunit(temp);
     // p = plane(point3(0,10,-20), vec3(0,0.5,0));
     p = plane(point3(0,-10,-20), temp);
-    temp = vec3(0,1,0);
+    temp = vec3(0, 0.7, 0.7);
     temp = vunit(temp);
     p1 = plane(point3(0,0,-20), temp);
-	t_cylinder *cy = cylinder(point3(0, 0, -10), 2, 10, temp);
+	t_cylinder *cy = cylinder(point3(0, 0, -10), 2, 5, temp);
     t_object **obj;
     
     obj = create_object();

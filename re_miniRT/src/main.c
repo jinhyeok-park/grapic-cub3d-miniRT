@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:25:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/02 19:06:07 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/02 21:50:13 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,43 @@
 //     gettimeofday(&time, NULL);
 //     return (time.tv_sec * 1000 + time.tv_usec / 1000);
 // }
+typedef struct s_mlx 
+{
+    void    *mlx_ptr;
+    void    *win_ptr;
+    t_data  img;
+}t_mlx;
+
+int key_hook(int keycode, t_mlx *mlxs)
+{
+    if (keycode == 53)
+    {
+        printf("exit");
+        exit(0);
+    }
+    printf("%d\n", keycode);
+    if (keycode == 13)
+        printf("w");
+    else if (keycode == 0)
+        printf("a");
+    else if (keycode == 1)
+        printf("s");
+    else if (keycode == 2)
+        printf("d");
+    return (0);
+}
 
 int main(int ac, char **av)
 {
+    t_mlx   mlxs;
     void    *mlx_ptr;
     void    *win_ptr;
     t_data  img;
 
     mlx_ptr = mlx_init();
+    mlxs.mlx_ptr = mlx_ptr;
     win_ptr = mlx_new_window(mlx_ptr, 1000, 800, "miniRT canvas");
+    mlxs.win_ptr = win_ptr;
 	img.img = mlx_new_image(mlx_ptr, 1000, 800);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
     
@@ -68,5 +96,6 @@ int main(int ac, char **av)
     }
     mlx_put_image_to_window(mlx_ptr, win_ptr, img.img, 0, 0);
     //printf("Delta Time : %d\n", gettime() - time);
+    mlx_hook(win_ptr, 2,0, key_hook, &mlxs);
 	mlx_loop(mlx_ptr);
 }

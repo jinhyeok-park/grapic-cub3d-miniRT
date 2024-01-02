@@ -46,7 +46,55 @@ t_bool hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec)
     double  root;
     double  root1;
     double  sqrtd;
+    double  dot;
+    t_vec3  disc;
+    t_vec3  rev;
+    t_point3  p;
+    t_vec3    v;
+    double  t;
+    double  d;
 
+    rev = vmult(cy->normal, -1);
+    dot = vdot(ray->dir, rev); // 내적하였을때 두 가지로 판단 할 수 있다. 
+    if (dot < 0)
+    {
+        disc = vminus(cy->center, ray->orig);
+        t = vdot(disc, rev) / dot;
+        if (t >= 0)
+        {
+            p = ray_at(ray, t);
+            v = vminus(p, cy->center);
+            d = vdot(v, v);
+            if (sqrtf(d) <= cy->radius)
+            {
+                rec->t = t;
+                rec->p = p;
+                rec->normal = rev;
+                return TRUE;
+            }
+        }
+    }
+    dot = vdot(ray->dir, cy->normal);
+    if (dot < 0)
+    {
+        t_point3 new_center;
+        new_center = vplus(cy->center, vmult(cy->normal, cy->height));
+        disc = vminus(new_center, ray->orig);
+        t = vdot(disc, cy->normal) / dot;
+        if (t >= 0)
+        {
+            p = ray_at(ray, t);
+            v = vminus(p, new_center);
+            d = vdot(v, v);
+            if (sqrtf(d) <= cy->radius)
+            {
+                rec->t = t;
+                rec->p = p;
+                rec->normal = cy->normal;
+                return TRUE;
+            }
+        }
+    }
     x = vminus(ray->orig, cy->center);
     a = vdot(ray->dir, ray->dir) - pow((vdot(ray->dir, cy->normal)), 2);
     b = vdot(ray->dir, x) - vdot(ray->dir, cy->normal) * vdot(x, cy->normal);
@@ -63,15 +111,9 @@ t_bool hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec)
     root1 = (-b + sqrtd) / a;
 
     if (root >= rec->tmin && root <= rec->tmax)
-    {
-        //printf("hit\n");
         root = root;
-    }
     else if (root1 >= rec->tmin && root1 <= rec->tmax)
-    {
-        //printf("hit");
         root = root1;
-    }
     else
         return FALSE;
     double  m;
@@ -83,12 +125,8 @@ t_bool hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec)
     t_vec3  normal;
     normal = vminus(vminus(rec->p, cy->center), vmult(cy->normal, m));
     rec->normal = vunit(normal);
-    
-    //t_vec3 outward_normal = vunit(vminus(vminus(rec->p, cy->center), vmult(cy->normal, vdot(vminus(rec->p, cy->center), cy->normal))));
-    //rec->normal = outward_normal;
-    //rec->normal = cy->normal; // 정규화된 법선 벡터.
-    //set_face_normal(ray, rec); // rec의 법선벡터와 광선의 방향벡터를 비교해서 앞면인지 뒷면인지 t_bool 값으로 저장.
-    // set_face_normal(ray, rec, outward_normal);
+
+    set_face_normal(ray, rec, rec->normal);
     return (TRUE);
 }
 
