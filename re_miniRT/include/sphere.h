@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:54:30 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 14:11:36 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:29:12 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_sphere
 	t_point3	center;
 	double		radius;
 	double		radius2;
+	t_color3	color;
 }	t_sphere;
 
 t_sphere	*sphere(t_point3 center, double radius);

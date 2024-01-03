@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
+#    By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:24:31 by jinhyeok          #+#    #+#              #
-#    Updated: 2024/01/03 13:24:29 by jinhyeok         ###   ########.fr        #
+#    Updated: 2024/01/03 15:42:09 by minjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SOURCES = ./src/main.c\
 			./src/light.c\
 			./src/plane.c\
 			./src/cylinder.c\
+			./src/parsing.c\
 
 INCLUDES = ./include
 

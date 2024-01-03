@@ -6,11 +6,36 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:25:48 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/02 02:45:58 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/03 15:43:52 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+int	check_file(int ac, char **av)
+{
+	int	i;
+	int	fd;
+
+	fd = 0;
+	if (ac != 2)
+		return (1);
+	if (!av[1])
+		return (1);
+	i = ft_strlen(av[1]);
+	if (i < 4)
+		return (1);
+	if (av[1][i - 1] == 't' || av[1][i - 2] == 'r' || av[1][i - 3] == '.')
+	{
+		fd = open(av[1], O_RDONLY);
+		if (fd < 0)
+			return (1);
+		close(fd);
+	}
+	else
+		return (1);
+	return (0);
+}
 
 void	free_split(char **s)
 {
@@ -74,18 +99,14 @@ double	ft_atod(const char *str)
 t_color3	get_color(char *s)
 {
 	char	**params;
-	t_color3	cord;
+	t_color3	color;
 
 	params = ft_split(s, ',');
 	if (!params || !params[1] || !params[2] || params[3])
-		ft_err("invalid color!");
-	cord = (t_color3){ft_atoi(params[0]), ft_atoi(params[1]), ft_atoi(params[2])};
-	if (cord.r > 255 || cord.g > 255 || cord.b > 255)
-		ft_err("invalid color");
-	if (cord.r < 0 || cord.g < 0 || cord.b < 0)
-		ft_err("invalid color");
+		ft_error("invalid color");
+	color = color3(ft_atod(params[0]), ft_atod(params[1]), ft_atod(params[2]));
 	free_split(params);
-	return (cord);
+	return (color);
 }
 
 t_vec3	get_vec(char *s)
@@ -95,7 +116,7 @@ t_vec3	get_vec(char *s)
 
 	params = ft_split(s, ',');
 	if (!params || !params[1] || !params[2] || params[3])
-		ft_err("invalid coordinates");
+		ft_error("invalid coordinates");
 	cord = vec3(ft_atod(params[0]), ft_atod(params[1]), ft_atod(params[2]));
 	free_split(params);
 	return (cord);
@@ -104,28 +125,31 @@ t_vec3	get_vec(char *s)
 void	parse_ambient(t_input *src, char **tocken)
 {
 	if (!tocken || !tocken[1] || !tocken[2] || tocken[3])
-		ft_err("invalid ambiant!");
-	src->amb.ratio = ft_atod(tocken[1]);
-	if (src->amb.ratio < 0 || src->amb.ratio > 1)
-		ft_err("enter ambient lighting ratio in range [0.0,1.0]");
-	src->amb.color = get_color(tocken[2]);
+	{
+		ft_error("invalid ambiant!");
+	}
+	double ratio = ft_atod(tocken[1]);
+	if (ratio < 0 || ratio > 1)
+		ft_error("enter ambient lighting ratio in range [0.0,1.0]");
+	t_color3 color = get_color(tocken[2]);
+	src->ambient = cmult(color, ratio);
 }
 
 void	parse_camera(t_input *src, char **tockens)
 {
 	if (!tockens || !tockens[1] || !tockens[2] || !tockens[3] || tockens[4])
-		ft_err("invalid camera !");
-	src->cam.cen = get_vec(tockens[1]);
+		ft_error("invalid camera !");
+	src->cam.orig = get_vec(tockens[1]);
 	src->cam.dir = get_vec(tockens[2]);
 	if (src->cam.dir.x > 1 || src->cam.dir.y > 1 || src->cam.dir.z > 1)
-		ft_err("invalid orientation camera");
+		ft_error("invalid orientation camera");
 	if (src->cam.dir.x < -1 || src->cam.dir.y < -1 || src->cam.dir.z < -1)
-		ft_err("invalid orientation camera");
+		ft_error("invalid orientation camera");
 	if (src->cam.dir.x == 0 && src->cam.dir.y == 0 && src->cam.dir.z == 0)
-		ft_err("invalid orientation camera");
+		ft_error("invalid orientation camera");
 	src->cam.fov = ft_atod(tockens[3]);
 	if (src->cam.fov < 0 || src->cam.fov > 180)
-		ft_err("FOV  in range [0,180]");
+		ft_error("FOV  in range [0,180]");
 }
 
 void	parse_light(t_input *src, char **tockens)
@@ -133,12 +157,13 @@ void	parse_light(t_input *src, char **tockens)
 	static int	i = 0;
 
 	if (!tockens || !tockens[1] || !tockens[2] || tockens[3])
-		ft_err("invalid light !");
-	src->light[i].src = get_vec(tockens[1]);
-	src->light[i].ratio = ft_atod(tockens[2]);
-	if (src->light[i].src < 0 || src->light[i].ratio > 1)
-		ft_err("enter the light brightness ratio in range [0.0,1.0]");
+		ft_error("invalid light !");
+	src->light[i].origin = get_vec(tockens[1]);
+	src->light[i].bright_ratio = ft_atod(tockens[2]);
+	if (src->light[i].bright_ratio < 0 || src->light[i].bright_ratio > 1)
+		ft_error("enter the light brightness ratio in range [0.0,1.0]");
 	i++;
+	src->num_li = i;
 }
 
 void	parse_sphere(t_input *src, char **tockens)
@@ -146,13 +171,15 @@ void	parse_sphere(t_input *src, char **tockens)
 	static int	i = 0;
 
 	if (!tockens || !tockens[1] || !tockens[2] || !tockens[3] || tockens[4])
-		ft_err("invalid sphere");
-	src->sphere[i].cen = get_vec(tockens[1]);
+		ft_error("invalid sphere");
+	src->sphere[i].center = get_vec(tockens[1]);
 	src->sphere[i].radius = ft_atod(tockens[2]);
-	if (sphere[i].radius <= 0)
-		ft_err("invalid diameter sphere");
+	src->sphere[i].radius2 = pow(src->sphere[i].radius, 2);
+	if (src->sphere[i].radius <= 0)
+		ft_error("invalid diameter sphere");
 	src->sphere[i].color = get_color(tockens[3]);
 	i++;
+	src->num_sp = i;
 }
 
 void	parse_plane(t_input *src, char **tockens)
@@ -160,17 +187,18 @@ void	parse_plane(t_input *src, char **tockens)
 	static int	i = 0;
 
 	if (!tockens || !tockens[1] || !tockens[2] || !tockens[3] || tockens[4])
-		ft_err("invalid plane");
-	src->plane[i].cen = get_vec(tockens[1]);
-	src->plane[i].norm = get_vec(tockens[2]);
-	if (src->plane[i].norm.x > 1 || src->plane[i].norm.y > 1 || src->plane[i].norm.z > 1)
-		ft_err("invalid plane normal");
-	if (src->plane[i].norm.x < -1 || src->plane[i].norm.y < -1 || src->plane[i].norm.z < -1)
-		ft_err("invalid plane normal");
-	if (src->plane[i].norm.x == 0 && src->plane[i].norm.y == 0 && src->plane[i].norm.z == 0)
-		ft_err("invalid plane normal");
+		ft_error("invalid plane");
+	src->plane[i].point = get_vec(tockens[1]);
+	src->plane[i].normal = get_vec(tockens[2]);
+	if (src->plane[i].normal.x > 1 || src->plane[i].normal.y > 1 || src->plane[i].normal.z > 1)
+		ft_error("invalid plane normal");
+	if (src->plane[i].normal.x < -1 || src->plane[i].normal.y < -1 || src->plane[i].normal.z < -1)
+		ft_error("invalid plane normal");
+	if (src->plane[i].normal.x == 0 && src->plane[i].normal.y == 0 && src->plane[i].normal.z == 0)
+		ft_error("invalid plane normal");
 	src->plane[i].color = get_color(tockens[3]);
 	i++;
+	src->num_pl = i;
 }
 
 void	parse_cylinder(t_input *src, char **tockens)
@@ -178,93 +206,90 @@ void	parse_cylinder(t_input *src, char **tockens)
 	static int i = 0;
 
 	if (!tockens || !tockens[1] || !tockens[2] || !tockens[3] || !tockens[4] || !tockens[5] || tockens[6])
-		ft_err("invalid cylinder");
-	src->cylinder[i].cen = get_vec(tockens[1]);
-	src->cylinder[i].norm = get_vec(tockens[2]);
-	if (src->cylinder[i].norm.x > 1 || src->cylinder[i].norm.y > 1 || src->cylinder[i].norm.z > 1)
-		ft_err("invalid cylinder normal");
-	if (src->cylinder[i].norm.x < -1 || src->cylinder[i].norm.y < -1 || src->cylinder[i].norm.z < -1)
-		ft_err("invalid cylinder normal");
-	if (src->cylinder[i].norm.x == 0 && src->cylinder[i].norm.y == 0 && src->cylinder[i].norm.z == 0)
-		ft_err("invalid cylinder normal");
+		ft_error("invalid cylinder");
+	src->cylinder[i].center = get_vec(tockens[1]);
+	src->cylinder[i].normal = get_vec(tockens[2]);
+	if (src->cylinder[i].normal.x > 1 || src->cylinder[i].normal.y > 1 || src->cylinder[i].normal.z > 1)
+		ft_error("invalid cylinder normal");
+	if (src->cylinder[i].normal.x < -1 || src->cylinder[i].normal.y < -1 || src->cylinder[i].normal.z < -1)
+		ft_error("invalid cylinder normal");
+	if (src->cylinder[i].normal.x == 0 && src->cylinder[i].normal.y == 0 && src->cylinder[i].normal.z == 0)
+		ft_error("invalid cylinder normal");
 	src->cylinder[i].radius = ft_atod(tockens[3]);
 	if (src->cylinder[i].radius <= 0)
-		ft_err("invalid cylinder diameter");
+		ft_error("invalid cylinder diameter");
 	src->cylinder[i].height = ft_atod(tockens[4]);
 	if (src->cylinder[i].height <= 0)
-		ft_err("invalid cylinder height");
+		ft_error("invalid cylinder height");
 	src->cylinder[i].color = get_color(tockens[5]);
 	i++;
+	src->num_cy = i;
 }
 
 void	parse_line(char *line, char **tmp, t_input *input_data)
 {
 	if (ft_strcmp(line, "A") == 0)
-		parse_ambient(tmp, input_data);
+	{	
+		parse_ambient(input_data, tmp);
+	}
 	else if (ft_strcmp(line, "C") == 0)
-		parse_camera(tmp, input_data);
+	{
+		parse_camera(input_data, tmp);
+	}
 	else if (ft_strcmp(line, "L") == 0)
-		parse_light(tmp, input_data);
+	{	
+		parse_light(input_data, tmp);
+	}
 	else if (ft_strcmp(line, "sp") == 0)
-		parse_sphere(tmp, input_data);
+	{
+		parse_sphere(input_data, tmp);
+	}
 	else if (ft_strcmp(line, "pl") == 0)
-		parse_plane(tmp, input_data);
+	{
+		parse_plane(input_data, tmp);
+	}
 	else if (ft_strcmp(line, "cy") == 0)
-		parse_cylinder(tmp, input_data);
+	{
+		parse_cylinder(input_data, tmp);
+	}
+	else if (ft_strcmp(line, "\n") == 0)
+	{
+		return ;
+	}
+	else
+	{
+		printf("Error : Wrong identifier [%s]", line);
+		ft_error("\n");
+	}
 }
 
-void    parsing(int ac,char ** av, t_input *input_data)
+void	parsing(int ac, char **av, t_input *input_data)
 {
-	int	tmp_fd;
-	int	fd;
-	int	a;
-	int	c;
-	int	l;
-	int	sp;
-	int	pl;
-	int	cy;
+    int fd;
+	input_data->num_sp = 0;
+	input_data->num_pl = 0;
+	input_data->num_cy = 0;
+	input_data->num_li = 0;
 
-	a = 0;
-	c = 0;
-	l = 0;
-	sp = 0;
-	pl = 0;
-	cy = 0;
-	if (check_file(ac, av))
-		ft_error("Error : Wrong file type, filename.rt\n");
-	tmp_fd = open(av[1], O_RDONLY);
-	while (1)
+    if (check_file(ac, av))
+        ft_error("Error: Wrong file type, filename.rt");
+
+    fd = open(av[1], O_RDONLY);
+    if (fd < 0)
+        ft_error("Error: Cannot open file");
+
+    char *str;
+    while ((str = get_next_line(fd)) != NULL)
 	{
-		char **tmp = ft_split(get_next_line(tmp_fd), ' ');
-		if (!tmp)
-			break ;
-		if (ft_strcmp(*tmp, "A") == 0)
-			a++;
-		else if (ft_strcmp(*tmp, "C") == 0)
-			c++;
-		else if (ft_strcmp(*tmp, "L") == 0)
-			l++;
-		else if (ft_strcmp(*tmp, "sp") == 0)
-			sp++;
-		else if (ft_strcmp(*tmp, "pl") == 0)
-			pl++;
-		else if (ft_strcmp(*tmp, "cy") == 0)
-			cy++;
-		else
-			ft_error("Error : Wrong identifier\n");
-		free_split(tmp);
-	}
-	close(tmp_fd);
-	// 동적할당
-	fd = open(av[1], O_RDONLY);
-	while (1)
-	{
-		char **tmp = ft_split(get_next_line(fd), ' ');
-		if (!tmp)
-			break ;
-		if (*tmp)
-			parse_line(*tmp, tmp, input_data);
-		free_split(tmp);
-	}
-	close(fd);
+        char **tmp = ft_split(str, ' ');
+        if (!tmp) {
+            free(str);
+            break;
+        }
+        if (*tmp)
+            parse_line(*tmp, tmp, input_data);
+        free_split(tmp);
+        free(str);
+    }
+    close(fd);
 }

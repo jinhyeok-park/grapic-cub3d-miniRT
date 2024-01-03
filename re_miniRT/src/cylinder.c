@@ -27,7 +27,7 @@ t_cylinder *cylinder(t_point3 center, double radius, double height, t_vec3 norma
 	return (ret);
 }
 
-static void set_face_normal(t_ray *r, t_hit_record *rec, t_vec3 outward_normal)
+static void set_face_normal_cylinder(t_ray *r, t_hit_record *rec, t_vec3 outward_normal)
 {
 	rec->front_face = vdot(r->dir, outward_normal) < 0;
 	rec->normal = rec->front_face ? outward_normal : vmult(outward_normal, -1);
@@ -126,7 +126,7 @@ t_bool hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec)
     normal = vminus(vminus(rec->p, cy->center), vmult(cy->normal, m));
     rec->normal = vunit(normal);
 
-    set_face_normal(ray, rec, rec->normal);
+    set_face_normal_cylinder(ray, rec, rec->normal);
     return (TRUE);
 }
 

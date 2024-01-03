@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:22:23 by minjcho           #+#    #+#             */
-/*   Updated: 2024/01/02 14:11:33 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:19:00 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@
 
 typedef struct s_cylinder
 {
-    t_point3 center; // center of the bottom base
-    t_vec3 normal;
-    double radius;
-    double height;
-} t_cylinder;
+	t_point3	center;
+	t_vec3		normal;
+	double		radius;
+	double		height;
+	t_color3	color;
+}	t_cylinder;
 
-//t_cylinder *cylinder(t_point3 center, double radius, double height);
-t_cylinder *cylinder(t_point3 center, double radius, double height, t_vec3 normal);
-t_bool hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec);
+t_cylinder	*cylinder(t_point3 center, double radius, double height, \
+					t_vec3 normal);
+t_bool		hit_cylinder(t_cylinder *cy, t_ray *ray, t_hit_record *rec);
 
 #endif

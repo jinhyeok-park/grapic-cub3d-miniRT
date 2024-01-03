@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:25:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 10:05:42 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:43:13 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,12 @@
 // #include <stdlib.h>
 #include "miniRT.h"
 
-// unsigned int gettime()
-// {
-//     struct timeval  time;
-
-//     gettimeofday(&time, NULL);
-//     return (time.tv_sec * 1000 + time.tv_usec / 1000);
-// }
 typedef struct s_mlx 
 {
     void    *mlx_ptr;
     void    *win_ptr;
     t_data  img;
-}t_mlx;
+}	t_mlx;
 
 int key_hook(int keycode, t_mlx *mlxs)
 {
@@ -62,6 +55,7 @@ int main(int ac, char **av)
     void    *mlx_ptr;
     void    *win_ptr;
     t_data  img;
+	t_input	input_data;
 
     mlx_ptr = mlx_init();
     mlxs.mlx_ptr = mlx_ptr;
@@ -78,11 +72,12 @@ int main(int ac, char **av)
     double  u;
     double  v;
 
-    scene_init(&s);
+	parsing(ac, av, &input_data);
+	scene_init1(&s, &input_data);
+    // scene_init(&s);
     t_color3 test;
     j = s.canvas.height - 1;
     
-    // unsigned int time = gettime();
     while (j >= 0)
     {
         i = 0;
@@ -91,10 +86,6 @@ int main(int ac, char **av)
             u = (double)i / (s.canvas.width - 1);
             v = (double)j / (s.canvas.height - 1);
             ray = ray_primary(&(s.camera), u, v);
-            // test = ray_color(&ray);
-            //test = ray_color(&ray, obj);
-            //printf("%d", s.world[0]->size);
-            // printf("%f, %f \n", u, v);
             s.ray = ray;
             test = ray_color(&s);
             write_color(test, &img, i, s.canvas.height - 1 - j);
@@ -103,7 +94,6 @@ int main(int ac, char **av)
         --j;
     }
     mlx_put_image_to_window(mlx_ptr, win_ptr, img.img, 0, 0);
-    //printf("Delta Time : %d\n", gettime() - time);
     mlx_hook(win_ptr, 2,0, key_hook, &mlxs);
 	mlx_loop(mlx_ptr);
 }
