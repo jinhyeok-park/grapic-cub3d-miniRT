@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:25:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/02 21:50:13 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/03 10:05:42 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,23 @@ int key_hook(int keycode, t_mlx *mlxs)
         printf("exit");
         exit(0);
     }
-    printf("%d\n", keycode);
+    //printf("%d\n", keycode);
     if (keycode == 13)
-        printf("w");
+        printf("forward");
     else if (keycode == 0)
-        printf("a");
+        printf("left move");
     else if (keycode == 1)
-        printf("s");
+        printf("back");
     else if (keycode == 2)
-        printf("d");
+        printf("right move");
+    else if (keycode == 126)
+        printf("up");
+    else if (keycode == 123)
+        printf("left");
+    else if (keycode == 125)
+        printf("down");
+    else if (keycode == 124)
+        printf("right");
     return (0);
 }
 

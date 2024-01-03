@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:21:03 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/01 12:35:34 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/03 14:32:19 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_object
 {
     int         type;
     int         size;
+    int         real_size;
     void        *element;
     t_color3    albedo;
 } t_object ;

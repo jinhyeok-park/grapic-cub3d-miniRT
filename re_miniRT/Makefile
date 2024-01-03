@@ -6,7 +6,7 @@
 #    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:24:31 by jinhyeok          #+#    #+#              #
-#    Updated: 2024/01/02 19:18:41 by jinhyeok         ###   ########.fr        #
+#    Updated: 2024/01/03 13:24:29 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SOURCES = ./src/main.c\
 			./src/camera.c\
 			./src/sphere.c\
 			./src/trace.c\
+			./src/trace2.c\
+			./src/trace3.c\
 			./src/object.c\
 			./src/scene.c\
 			./src/record.c\
