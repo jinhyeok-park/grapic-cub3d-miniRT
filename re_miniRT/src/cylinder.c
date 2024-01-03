@@ -23,7 +23,7 @@ t_cylinder *cylinder(t_point3 center, double radius, double height, t_vec3 norma
 	ret->center = center;
 	ret->radius = radius;
 	ret->height  = height;
-    ret->normal = normal;
+    ret->normal = vunit(normal);
 	return (ret);
 }
 

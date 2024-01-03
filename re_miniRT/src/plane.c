@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:03:54 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 14:13:43 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:57:04 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_plane	*plane(t_point3 point, t_vec3 normal)
 
 	ret = malloc(sizeof(t_plane));
 	ret->point = point;
-	ret->normal = normal;
+	ret->normal = vunit(normal);
 	return (ret);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:05:43 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 15:15:05 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:11:07 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_canvas
 }	t_canvas;
 
 t_canvas	canvas(int width, int height);
-t_camera	camera(t_canvas *canvas, t_point3 origin);
+//t_camera	camera(t_canvas *canvas, t_point3 origin);
+t_camera	camera(t_canvas *canvas, t_point3 origin, double fov);
+double		degrees_to_radians(double degrees);
 
 #endif
