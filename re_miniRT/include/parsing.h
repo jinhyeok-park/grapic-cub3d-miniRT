@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:18:29 by minjcho           #+#    #+#             */
-/*   Updated: 2024/01/04 15:55:52 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/04 19:32:58 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ typedef struct s_input
 {
 	t_color3	ambient;
 	t_camera	cam;
-	t_light		light[99];	
-	t_sphere	sphere[99];
-	t_plane		plane[99];
-	t_cylinder	cylinder[99];
+	t_light		*light;	
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
+	int			num_amb;
+	int			num_cam;
 	int			num_sp;
 	int			num_pl;
 	int			num_cy;

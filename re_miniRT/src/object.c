@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:23:41 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 14:54:05 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/04 20:07:34 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "commontype.h"
+#include <stdio.h>
 
 t_object	**create_object(void)
 {
 	int			i;
 	t_object	**ret;
-	
+
 	ret = (t_object **)malloc(sizeof(t_object *) * OBJECTSIZE);
 	i = 0;
 	while (i < OBJECTSIZE)
@@ -28,7 +29,7 @@ t_object	**create_object(void)
 	return (ret);
 }
 
-t_object	*object(int type, void* ele, t_color3 albedo)
+t_object	*object(int type, void *ele, t_color3 albedo)
 {
 	t_object	*ret;
 
@@ -55,17 +56,7 @@ void	object_add(t_object **vector, void *ele, int type, t_color3 albedo)
 		return ;
 	if (*vector && (*vector)->size >= (*vector)->real_size * OBJECTSIZE)
 	{
-		// (*vector)->real_size++;
-		// t_object	**real;
-
-		// c_size = (*vector)->real_size * OBJECTSIZE;
-		// real = (t_object **)malloc(sizeof(t_object *) * c_size);
-		// i = 0;
-		// c_size = ((*vector)->real_size - 1) * OBJECTSIZE;
-		// while (i < c_size)
-		// {
-			
-		// }
+		printf("hi i will do realloc\n");
 	}
 	temp = (t_object *)malloc(sizeof(t_object));
 	if (!temp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:21:24 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 13:25:24 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/04 20:05:00 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "plane.h"
 #include "cylinder.h"
 #include "light.h"
-
 
 t_color3	point_light_get(t_scene *s, t_light *light)
 {
