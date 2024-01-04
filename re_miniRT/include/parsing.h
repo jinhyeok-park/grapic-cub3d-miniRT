@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:18:29 by minjcho           #+#    #+#             */
-/*   Updated: 2024/01/03 15:23:49 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:55:52 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_input
 	int			num_pl;
 	int			num_cy;
 	int			num_li;
+	int			total_object;
 }	t_input;
 
 void	parsing(int ac, char **av, t_input *input_data);

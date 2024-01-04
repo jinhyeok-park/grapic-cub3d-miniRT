@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:25:48 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 15:43:52 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:57:07 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,4 +292,5 @@ void	parsing(int ac, char **av, t_input *input_data)
         free(str);
     }
     close(fd);
+	input_data->total_object = input_data->num_cy + input_data->num_li + input_data->num_pl + input_data->num_sp;
 }
