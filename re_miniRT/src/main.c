@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:25:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 15:43:13 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:57:28 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int key_hook(int keycode, t_mlx *mlxs)
     }
     //printf("%d\n", keycode);
     if (keycode == 13)
+    {
         printf("forward");
+    }
     else if (keycode == 0)
         printf("left move");
     else if (keycode == 1)

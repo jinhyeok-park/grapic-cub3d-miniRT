@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:04:39 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 16:14:29 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:57:11 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	scene_init1(t_scene *s, t_input *input_data)
 	i = 0;
 	s->canvas = canvas(1000, 800);
 	//s->camera = camera(&(s->canvas), input_data->cam.orig);
-	s->camera = camera(&(s->canvas), input_data->cam.orig, input_data->cam.fov);
+	//s->camera = camera(&(s->canvas), input_data->cam.orig, input_data->cam.fov);
+	s->camera = camera(&(s->canvas), input_data->cam.orig, input_data->cam.fov, input_data->cam.dir);
 	obj = create_object();
 	lights = create_object();
 	s->world = obj;
