@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:07:50 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/04 19:41:16 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 01:08:51 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,48 @@ t_canvas	canvas(int width, int height)
 	return (canvas);
 }
 
-t_camera	camera(t_canvas *canvas, t_point3 orig, double fov, t_vec3 direction)
+typedef struct s_camera_helper
 {
-	t_camera	cam;
-	double		focal_len;
-	double		viewport_height;
-	double		theta;
 	t_point3	look_at;
 	t_vec3		vup;
 	t_vec3		u;
 	t_vec3		v;
 	t_vec3		w;
+}	t_camera_helper;
 
-	look_at = vplus(orig, vunit(direction));
-	vup = vec3(0, 1, 0);
-	focal_len = vlength(vminus(look_at, orig));
-	w = vunit(vminus(orig, look_at));
-	u = vunit(vcross(vup, w));
-	v = vcross(w, u);
+t_camera_helper	init_camera_helper(t_point3 orig, t_vec3 direction)
+{
+	t_camera_helper	helper;
+
+	helper.look_at = vplus(orig, vunit(direction));
+	helper.vup = vec3(0, 1, 0);
+	helper.w = vunit(vminus(orig, helper.look_at));
+	helper.u = vunit(vcross(helper.vup, helper.w));
+	helper.v = vcross(helper.w, helper.u);
+	return (helper);
+}
+
+t_camera	camera(t_canvas *canvas, t_point3 orig, double fov, \
+				t_vec3 direction)
+{
+	t_camera		cam;
+	double			focal_len;
+	double			viewport_height;
+	double			theta;
+	t_camera_helper	helper;
+
+	helper = init_camera_helper(orig, direction);
+	focal_len = vlength(vminus(helper.look_at, orig));
 	theta = degrees_to_radians(fov) / 2;
 	viewport_height = 2.0 * tan(theta);
 	cam.viewport_h = viewport_height;
 	cam.viewport_w = cam.viewport_h * canvas->aspect_ratio;
 	cam.focal_len = focal_len;
-	cam.horizontal = vmult(u, cam.viewport_w);
-	cam.vertical = vmult(v, cam.viewport_h);
+	cam.horizontal = vmult(helper.u, cam.viewport_w);
+	cam.vertical = vmult(helper.v, cam.viewport_h);
 	cam.orig = orig;
-	cam.left_bottom = vminus(vminus(vminus(orig, vdivide(cam.horizontal, 2)), vdivide(cam.vertical, 2)), w);
+	cam.left_bottom = vminus(vminus(vminus(orig, vdivide(cam.horizontal, 2)), \
+					vdivide(cam.vertical, 2)), helper.w);
 	return (cam);
 }
 

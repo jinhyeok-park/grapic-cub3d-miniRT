@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:25:48 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/04 20:15:02 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 02:07:36 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ t_color3	get_color(char *s)
 		ft_error("invalid color");
 	color = color3(ft_atod(params[0]), ft_atod(params[1]), ft_atod(params[2]));
 	free_split(params);
-	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255 || color.b < 0 || color.b > 255)
+	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255 \
+		|| color.b < 0 || color.b > 255)
 		ft_error("invalid color");
 	return (color);
 }
@@ -221,39 +222,56 @@ void	parse_plane(t_input *src, char **tockens)
 		ft_error("invalid plane");
 	src->plane[i].point = get_vec_plane(tockens[1]);
 	src->plane[i].normal = get_vec(tockens[2]);
-	if (src->plane[i].normal.x > 1 || src->plane[i].normal.y > 1 || src->plane[i].normal.z > 1)
+	if (src->plane[i].normal.x > 1 || src->plane[i].normal.y > 1 \
+		|| src->plane[i].normal.z > 1)
 		ft_error("invalid plane normal");
-	if (src->plane[i].normal.x < -1 || src->plane[i].normal.y < -1 || src->plane[i].normal.z < -1)
+	if (src->plane[i].normal.x < -1 || src->plane[i].normal.y < -1 \
+		|| src->plane[i].normal.z < -1)
 		ft_error("invalid plane normal");
-	if (src->plane[i].normal.x == 0 && src->plane[i].normal.y == 0 && src->plane[i].normal.z == 0)
+	if (src->plane[i].normal.x == 0 && src->plane[i].normal.y == 0 \
+		&& src->plane[i].normal.z == 0)
 		ft_error("invalid plane normal");
 	src->plane[i].color = get_color(tockens[3]);
 	i++;
 }
 
-void	parse_cylinder(t_input *src, char **tockens)
+void	validate_tokens(char **tokens)
+{
+	if (ft_strcmp(tokens[6], "\n") == 0)
+		ft_error("No space after cylinder");
+	if (!tokens || !tokens[1] || !tokens[2] || !tokens[3] || \
+		!tokens[4] || !tokens[5] || tokens[6])
+		ft_error("invalid cylinder");
+}
+
+void	check_normal_vector(t_vec3 normal)
+{
+	if (normal.x > 1 || normal.y > 1 || normal.z > 1 || \
+		normal.x < -1 || normal.y < -1 || normal.z < -1 || \
+		(normal.x == 0 && normal.y == 0 && normal.z == 0))
+		ft_error("invalid cylinder normal");
+}
+
+void	set_cylinder_properties(t_cylinder *cylinder, char **tokens)
+{
+	cylinder->center = get_vec(tokens[1]);
+	cylinder->normal = get_vec(tokens[2]);
+	check_normal_vector(cylinder->normal);
+	cylinder->radius = ft_atod(tokens[3]) / 2;
+	if (cylinder->radius <= 0)
+		ft_error("invalid cylinder diameter");
+	cylinder->height = ft_atod(tokens[4]);
+	if (cylinder->height <= 0)
+		ft_error("invalid cylinder height");
+	cylinder->color = get_color(tokens[5]);
+}
+
+void	parse_cylinder(t_input *src, char **tokens)
 {
 	static int	i = 0;
 
-	if (ft_strcmp(tockens[6], "\n") == 0)
-		ft_error("No space after cylinder");
-	if (!tockens || !tockens[1] || !tockens[2] || !tockens[3] || !tockens[4] || !tockens[5] || tockens[6])
-		ft_error("invalid cylinder");
-	src->cylinder[i].center = get_vec(tockens[1]);
-	src->cylinder[i].normal = get_vec(tockens[2]);
-	if (src->cylinder[i].normal.x > 1 || src->cylinder[i].normal.y > 1 || src->cylinder[i].normal.z > 1)
-		ft_error("invalid cylinder normal");
-	if (src->cylinder[i].normal.x < -1 || src->cylinder[i].normal.y < -1 || src->cylinder[i].normal.z < -1)
-		ft_error("invalid cylinder normal");
-	if (src->cylinder[i].normal.x == 0 && src->cylinder[i].normal.y == 0 && src->cylinder[i].normal.z == 0)
-		ft_error("invalid cylinder normal");
-	src->cylinder[i].radius = ft_atod(tockens[3]) / 2;
-	if (src->cylinder[i].radius <= 0)
-		ft_error("invalid cylinder diameter");
-	src->cylinder[i].height = ft_atod(tockens[4]);
-	if (src->cylinder[i].height <= 0)
-		ft_error("invalid cylinder height");
-	src->cylinder[i].color = get_color(tockens[5]);
+	validate_tokens(tokens);
+	set_cylinder_properties(&src->cylinder[i], tokens);
 	i++;
 }
 
@@ -275,8 +293,7 @@ void	parse_line(char *line, char **tmp, t_input *input_data)
 		return ;
 	else
 	{
-		printf("Error : Wrong identifier [%s]", line);
-		ft_error("");
+		ft_error("Error: Wrong identifier");
 	}
 }
 
@@ -303,60 +320,77 @@ void	count_object(char *line, t_input *input_data)
 void	malloc_object(t_input *input_data)
 {
 	input_data->light = (t_light *)malloc(sizeof(t_light) * input_data->num_li);
-	input_data->sphere = (t_sphere *)malloc(sizeof(t_sphere) * input_data->num_sp);
+	input_data->sphere = (t_sphere *)malloc(sizeof(t_sphere) \
+											* input_data->num_sp);
 	input_data->plane = (t_plane *)malloc(sizeof(t_plane) * input_data->num_pl);
-	input_data->cylinder = (t_cylinder *)malloc(sizeof(t_cylinder) * input_data->num_cy);
+	input_data->cylinder = (t_cylinder *)malloc(sizeof(t_cylinder) * \
+											input_data->num_cy);
 }
 
-void	parsing(int ac, char **av, t_input *input_data)
+void	initialize_input_data(t_input *input_data)
 {
-	int		fd;
-	char	*str;
-	char	**tmp;
-
 	input_data->num_amb = 0;
 	input_data->num_cam = 0;
 	input_data->num_sp = 0;
 	input_data->num_pl = 0;
 	input_data->num_cy = 0;
 	input_data->num_li = 0;
-	if (check_file(ac, av))
-		ft_error("Error: Wrong file type, filename.rt");
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		ft_error("Error: Cannot open file");
+}
+
+void	process_file(int fd, t_input *input_data)
+{
+	char	*str;
+	char	**tmp;
+
 	str = get_next_line(fd);
 	while (str != NULL)
 	{
 		tmp = ft_split(str, ' ');
 		if (!tmp)
-		{
-			free(str);
-			continue ;
-		}
+			ft_error("Error: Cannot split");
 		if (*tmp)
 			count_object(*tmp, input_data);
 		free_split(tmp);
 		free(str);
 		str = get_next_line(fd);
 	}
-	input_data->total_object = input_data->num_cy + input_data->num_li + input_data->num_pl + input_data->num_sp;
-	close(fd);
-	malloc_object(input_data);
-	fd = open(av[1], O_RDONLY);
+}
+
+void	parse_file(int fd, t_input *input_data)
+{
+	char	*str;
+	char	**tmp;
+
 	str = get_next_line(fd);
 	while (str != NULL)
 	{
 		tmp = ft_split(str, ' ');
-		if (!tmp) {
-			free(str);
-			break;
-		}
+		if (!tmp)
+			ft_error("Error: Cannot split");
 		if (*tmp)
 			parse_line(*tmp, tmp, input_data);
 		free_split(tmp);
 		free(str);
 		str = get_next_line(fd);
 	}
+}
+
+void	parsing(int ac, char **av, t_input *input_data)
+{
+	int	fd;
+
+	initialize_input_data(input_data);
+	if (check_file(ac, av))
+		ft_error("Error: Wrong file type, filename.rt");
+	fd = open(av[1], O_RDONLY);
+	if (fd < 0)
+		ft_error("Error: Cannot open file");
+	process_file(fd, input_data);
+	input_data->total_object = input_data->num_cy + input_data->num_li \
+							+ input_data->num_pl + input_data->num_sp;
+	close(fd);
+	malloc_object(input_data);
+	fd = open(av[1], O_RDONLY);
+	parse_file(fd, input_data);
 	close(fd);
 }
