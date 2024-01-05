@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:23:41 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/04 20:07:34 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 12:41:17 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 #include "commontype.h"
 #include <stdio.h>
 
-t_object	**create_object(void)
+t_object	**create_object(int size)
 {
 	int			i;
 	t_object	**ret;
-
-	ret = (t_object **)malloc(sizeof(t_object *) * OBJECTSIZE);
+	
+	ret = (t_object **)malloc(sizeof(t_object *) * size);
+	if (!ret)
+	{
+		printf("malloc error\n");
+		exit(1);
+	}
 	i = 0;
-	while (i < OBJECTSIZE)
+	while (i < size)
 	{
 		ret[i] = NULL;
 		i++;
@@ -29,7 +34,7 @@ t_object	**create_object(void)
 	return (ret);
 }
 
-t_object	*object(int type, void *ele, t_color3 albedo)
+t_object	*object(int type, void* ele, t_color3 albedo)
 {
 	t_object	*ret;
 
@@ -53,14 +58,16 @@ void	object_add(t_object **vector, void *ele, int type, t_color3 albedo)
 	int			c_size;
 
 	if (!vector || !ele)
-		return ;
-	if (*vector && (*vector)->size >= (*vector)->real_size * OBJECTSIZE)
 	{
-		printf("hi i will do realloc\n");
+		printf("check the malloc status malloc error occur\n");
+		exit(1);
 	}
 	temp = (t_object *)malloc(sizeof(t_object));
 	if (!temp)
+	{
+		printf("malloc error\n");
 		exit(1);
+	}
 	if (type == CIRCLE)
 		temp->type = CIRCLE;
 	else if (type == LIGHT)

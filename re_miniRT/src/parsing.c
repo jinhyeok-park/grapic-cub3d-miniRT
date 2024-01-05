@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:25:48 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 12:34:30 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 12:45:04 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,12 @@ t_color3	get_color(char *s)
 	if (!params || !params[1] || !params[2] || params[3])
 		ft_error("invalid color");
 	color = color3(ft_atod(params[0]), ft_atod(params[1]), ft_atod(params[2]));
-	free_split(params);
-	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255 \
+		if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255 \
 		|| color.b < 0 || color.b > 255)
 		ft_error("invalid color");
+	color = color3(ft_atod(params[0]) / 255, ft_atod(params[1]) / 255 \
+	, ft_atod(params[2]) / 255);
+	free_split(params);
 	return (color);
 }
 

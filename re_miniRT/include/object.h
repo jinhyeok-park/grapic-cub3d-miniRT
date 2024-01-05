@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:21:03 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 15:21:48 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 12:41:21 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_object
 	t_color3	albedo;
 }	t_object;
 
-t_object	**create_object(void);
+t_object	**create_object(int size);
 t_object	*object(int type, void *ele, t_color3 albedo);
 void		object_add(t_object **vector, void *ele, int type, t_color3 albedo);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:04:39 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 01:20:06 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 12:41:46 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	init_canvas_camera(t_scene *s, t_input *input_data)
 void	create_objects_lights(t_scene *s, t_input *input_data, \
 							t_object ***obj, t_object ***lights)
 {
-	*obj = create_object();
-	*lights = create_object();
+	*obj = create_object(input_data->total_object);
+	*lights = create_object(input_data->num_li);
 	s->world = *obj;
 	s->light = NULL;
 	s->ambient = input_data->ambient;
