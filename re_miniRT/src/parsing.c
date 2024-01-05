@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:25:48 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 12:45:04 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:37:52 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,9 +206,12 @@ t_vec3	get_vec_plane(char *s)
 
 	params = ft_split(s, ',');
 	if (!params[2])
+	{
 		params[2] = ft_strdup("0");
+		params[3] = NULL;
+	}
 	if (!params || !params[1] || !params[2] || params[3])
-		ft_error("invalid coordinates");
+		ft_error("invalid coordinatesiiiii");
 	cord = vec3(ft_atod(params[0]), ft_atod(params[1]), ft_atod(params[2]));
 	free_split(params);
 	return (cord);
