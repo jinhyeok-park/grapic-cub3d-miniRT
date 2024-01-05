@@ -6,7 +6,7 @@
 /*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:54:38 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 14:09:52 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:48:30 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ t_bool	hit_sphere(t_sphere *sp, t_ray *ray, t_hit_record *rec)
 void	set_face_normal(t_ray *r, t_hit_record *rec)
 {
 	if (vdot(r->dir, rec->normal) < 0)
-		rec->front_face = -1;
+		rec->front_face = TRUE;
 	else
-		rec->front_face = 1;
+		rec->front_face = FALSE;
 	if (rec->front_face)
 		rec->normal = rec->normal;
 	else

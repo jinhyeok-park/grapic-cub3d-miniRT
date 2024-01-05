@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+         #
+#    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:24:31 by jinhyeok          #+#    #+#              #
-#    Updated: 2024/01/05 13:59:29 by minjcho          ###   ########.fr        #
+#    Updated: 2024/01/05 16:21:17 by jinhyeok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SOURCES = ./src/main.c\
 			./src/color3.c\
 			./src/pixel.c\
@@ -36,6 +36,7 @@ SOURCES = ./src/main.c\
 			./src/parsing_initial.c\
 			./src/parsing_object.c\
 			./src/scene_init.c\
+			./src/exit.c\
 
 INCLUDES = ./include
 

@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:25:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 12:36:42 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 16:22:34 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <sys/time.h>
-// #include <stdio.h>
-// #include <stdlib.h>
 #include "miniRT.h"
-
-void	free_parsing(t_input *input_data);
-
-typedef struct s_mlx
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_data	img;
-}	t_mlx;
-
-int	key_hook(int keycode, t_mlx *mlxs)
-{
-	if (keycode == 53)
-	{
-		printf("exit");
-		exit(0);
-	}
-	return (0);
-}
 
 void	init_graphics(t_mlx *mlxs, t_data *img)
 {
@@ -85,7 +63,8 @@ int	main(int ac, char **av)
 	init_graphics(&mlxs, &img);
 	process_scene(&s, ac, av, &input_data);
 	render_loop(&mlxs, &img, &s);
-	mlx_hook(mlxs.win_ptr, 2, 0, key_hook, &mlxs);
+	mlx_hook(mlxs.win_ptr, 2, 0, key_hook, NULL);
+	mlx_hook(mlxs.win_ptr, 17, 0, close_window, NULL);
 	mlx_loop(mlxs.mlx_ptr);
 	free_parsing(&input_data);
 	return (0);
