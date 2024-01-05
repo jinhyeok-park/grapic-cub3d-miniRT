@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:25:48 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 15:05:12 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 22:20:52 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,12 @@ void	process_file(int fd, t_input *input_data)
 		free(str);
 		str = get_next_line(fd);
 	}
+	if (input_data->num_amb == 0 || input_data->num_cam == 0 \
+		|| input_data->num_li == 0)
+		ft_error("Error: Missing object");
+	if (input_data->num_cy == 0 && input_data->num_pl == 0 \
+		&& input_data->num_sp == 0)
+		ft_error("Error: Object is not exist");
 }
 
 void	parse_file(int fd, t_input *input_data)

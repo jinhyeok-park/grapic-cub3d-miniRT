@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:07:50 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 01:08:51 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 22:23:59 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@ t_canvas	canvas(int width, int height)
 	canvas.aspect_ratio = (double)width / (double)height;
 	return (canvas);
 }
-
-typedef struct s_camera_helper
-{
-	t_point3	look_at;
-	t_vec3		vup;
-	t_vec3		u;
-	t_vec3		v;
-	t_vec3		w;
-}	t_camera_helper;
 
 t_camera_helper	init_camera_helper(t_point3 orig, t_vec3 direction)
 {

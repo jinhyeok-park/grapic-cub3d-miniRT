@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:04:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 15:32:15 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 22:23:28 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_ray		ray_primary(t_camera *cam, double u, double v);
 t_color3	ray_color(t_scene *s);
 t_color3	phong_lighting(t_scene *scene);
 t_color3	point_light_get(t_scene *scene, t_light *light);
-
 t_color3	diffus_get(t_scene *s, t_vec3 light_dir, t_light *light);
 t_color3	specular_get(t_scene *s, t_light *light, t_vec3 light_dir);
 t_bool		hit_divide2(int index, t_scene *s, t_ray *ray, \

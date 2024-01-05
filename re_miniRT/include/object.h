@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:21:03 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 12:41:21 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:21:44 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define PLANE 3
 # define CYLINDER 4
 # include <stdlib.h>
+# include <stdio.h>
 # include "color3.h"
 
 typedef struct s_object

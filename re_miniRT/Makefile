@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+         #
+#    By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:24:31 by jinhyeok          #+#    #+#              #
-#    Updated: 2024/01/05 16:21:17 by jinhyeok         ###   ########.fr        #
+#    Updated: 2024/01/05 22:19:50 by minjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 SOURCES = ./src/main.c\
 			./src/color3.c\
 			./src/pixel.c\
@@ -37,6 +37,8 @@ SOURCES = ./src/main.c\
 			./src/parsing_object.c\
 			./src/scene_init.c\
 			./src/exit.c\
+			./src/cylinder_utils.c\
+			./src/cylinder_hits.c\
 
 INCLUDES = ./include
 

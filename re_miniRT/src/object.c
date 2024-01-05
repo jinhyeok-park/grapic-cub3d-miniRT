@@ -6,13 +6,12 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:23:41 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 13:57:42 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 22:22:39 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "commontype.h"
-#include <stdio.h>
 
 t_object	**create_object(int size)
 {
@@ -51,6 +50,20 @@ t_object	*object(int type, void *ele, t_color3 albedo)
 	return (ret);
 }
 
+int	assign_type(int type)
+{
+	if (type == CIRCLE)
+		return (CIRCLE);
+	else if (type == LIGHT)
+		return (LIGHT);
+	else if (type == PLANE)
+		return (PLANE);
+	else if (type == CYLINDER)
+		return (CYLINDER);
+	else
+		return (-1);
+}
+
 void	object_add(t_object **vector, void *ele, int type, t_color3 albedo)
 {
 	t_object	*temp;
@@ -58,26 +71,11 @@ void	object_add(t_object **vector, void *ele, int type, t_color3 albedo)
 	int			c_size;
 
 	if (!vector || !ele)
-	{
-		printf("check the malloc status malloc error occur\n");
 		exit(1);
-	}
 	temp = (t_object *)malloc(sizeof(t_object));
 	if (!temp)
-	{
-		printf("malloc error\n");
 		exit(1);
-	}
-	if (type == CIRCLE)
-		temp->type = CIRCLE;
-	else if (type == LIGHT)
-		temp->type = LIGHT;
-	else if (type == PLANE)
-		temp->type = PLANE;
-	else if (type == CYLINDER)
-		temp->type = CYLINDER;
-	else
-		temp->type = -1;
+	temp->type = assign_type(type);
 	temp->element = ele;
 	temp->real_size = 1;
 	temp->albedo = albedo;
