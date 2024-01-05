@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:25:48 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 02:07:36 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 12:34:30 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -386,8 +386,8 @@ void	parsing(int ac, char **av, t_input *input_data)
 	if (fd < 0)
 		ft_error("Error: Cannot open file");
 	process_file(fd, input_data);
-	input_data->total_object = input_data->num_cy + input_data->num_li \
-							+ input_data->num_pl + input_data->num_sp;
+	input_data->total_object = input_data->num_cy + input_data->num_pl \
+								+ input_data->num_sp;
 	close(fd);
 	malloc_object(input_data);
 	fd = open(av[1], O_RDONLY);
