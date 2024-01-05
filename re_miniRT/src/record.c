@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   record.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:45:04 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 14:13:21 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:36 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "record.h"
+#include "miniRT.h"
 
 t_hit_record	record_init(void)
 {

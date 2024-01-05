@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:12:30 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/04 19:49:25 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:47 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "light.h"
+#include "miniRT.h"
 
 t_light	*light_point(t_point3 light_origin, t_color3 light_color, \
 					double bright_ratio)

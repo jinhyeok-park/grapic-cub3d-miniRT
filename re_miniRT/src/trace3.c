@@ -6,15 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:21:24 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 14:51:29 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:23:14 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "trace.h"
-#include "sphere.h"
-#include "plane.h"
-#include "cylinder.h"
-#include "light.h"
+#include "miniRT.h"
 
 t_color3	point_light_get(t_scene *s, t_light *light)
 {

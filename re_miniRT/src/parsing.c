@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:25:48 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 22:20:52 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:40 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "miniRT.h"
 
 void	parse_line(char *line, char **tmp, t_input *input_data)
 {

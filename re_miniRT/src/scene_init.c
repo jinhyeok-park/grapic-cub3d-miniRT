@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:58:27 by minjcho           #+#    #+#             */
-/*   Updated: 2024/01/05 14:00:14 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:35 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
+#include "miniRT.h"
 
 void	init_canvas_camera(t_scene *s, t_input *input_data)
 {

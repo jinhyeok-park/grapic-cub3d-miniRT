@@ -6,15 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:04:39 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 15:14:36 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:34 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
-#include "sphere.h"
-#include "light.h"
-#include "plane.h"
-#include "cylinder.h"
+#include "miniRT.h"
 
 void	add_spheres(t_object **obj, t_input *input_data)
 {

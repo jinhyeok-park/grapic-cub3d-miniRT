@@ -6,12 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:54:38 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 19:15:05 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 00:56:57 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sphere.h"
-#include "trace.h"
+#include "miniRT.h"
 
 t_sphere	*sphere(t_point3 center, double radius)
 {

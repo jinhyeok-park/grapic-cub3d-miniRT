@@ -6,12 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:16:49 by minjcho           #+#    #+#             */
-/*   Updated: 2024/01/05 22:18:48 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 00:55:55 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "trace.h"
-#include "cylinder.h"
+#include "miniRT.h"
 
 void	set_face_normal_cylinder(t_ray *r, t_hit_record *rec, \
 									t_vec3 outward_normal)

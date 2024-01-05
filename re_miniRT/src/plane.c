@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:03:54 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 19:11:06 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:36 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "plane.h"
+#include "miniRT.h"
 
 t_plane	*plane(t_point3 point, t_vec3 normal)
 {

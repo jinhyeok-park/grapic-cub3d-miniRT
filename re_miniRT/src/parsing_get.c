@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:52:36 by minjcho           #+#    #+#             */
-/*   Updated: 2024/01/05 13:56:29 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:44 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "miniRT.h"
 
 t_color3	get_color(char *s)
 {

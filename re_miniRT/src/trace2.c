@@ -6,15 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:20:06 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/04 20:04:53 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:23:19 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sphere.h"
-#include "plane.h"
-#include "cylinder.h"
-#include "light.h"
-#include "trace.h"
+#include "miniRT.h"
 
 t_bool	hit_divide2(int index, t_scene *s, t_ray *ray, t_hit_record *local_rec)
 {

@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   trace.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:03:40 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 13:22:28 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/06 01:23:10 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "trace.h"
-#include "sphere.h"
-#include "plane.h"
-#include "cylinder.h"
-#include "light.h"
+#include "miniRT.h"
 
 t_ray	ray(t_point3 orig, t_vec3 dir)
 {

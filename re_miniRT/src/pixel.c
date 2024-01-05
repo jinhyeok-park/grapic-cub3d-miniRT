@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:36:07 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/04 20:02:31 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:37 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pixel.h"
+#include "miniRT.h"
 
 void	write_color(t_color3 pixel_color, t_data *img, int x, int y)
 {

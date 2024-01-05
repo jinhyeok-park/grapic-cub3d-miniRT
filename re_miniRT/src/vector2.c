@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vector2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:53:40 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/03 10:19:53 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:06 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector3.h"
+#include "miniRT.h"
 
 t_vec3	vplus(t_vec3 vec, t_vec3 vec2)
 {

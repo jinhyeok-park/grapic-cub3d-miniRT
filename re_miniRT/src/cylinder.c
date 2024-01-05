@@ -6,12 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:19:41 by minjcho           #+#    #+#             */
-/*   Updated: 2024/01/05 22:19:27 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 00:55:58 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "trace.h"
-#include "cylinder.h"
+#include "miniRT.h"
 
 t_cylinder	*cylinder(t_point3 center, double radius, double height, \
 					t_vec3 normal)

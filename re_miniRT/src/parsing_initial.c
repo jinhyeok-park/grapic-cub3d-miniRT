@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:55:21 by minjcho           #+#    #+#             */
-/*   Updated: 2024/01/05 15:02:00 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:41 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "miniRT.h"
 
 void	set_cylinder_properties(t_cylinder *cylinder, char **tokens)
 {

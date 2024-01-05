@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:38:19 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/04 19:41:18 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 00:55:28 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color3.h"
+#include "miniRT.h"
 
 t_color3	color3(double r, double g, double b)
 {

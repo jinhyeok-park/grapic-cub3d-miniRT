@@ -6,12 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:23:41 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 22:22:39 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 00:56:10 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "object.h"
-#include "commontype.h"
+#include "miniRT.h"
 
 t_object	**create_object(int size)
 {
