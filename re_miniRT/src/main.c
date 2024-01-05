@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:25:08 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 01:17:46 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:47:09 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_graphics(t_mlx *mlxs, t_data *img)
 void	process_scene(t_scene *s, int ac, char **av, t_input *input_data)
 {
 	parsing(ac, av, input_data);
-	scene_init1(s, input_data);
+	scene_init(s, input_data);
 }
 
 void	render_loop(t_mlx *mlxs, t_data *img, t_scene *s)
@@ -53,6 +53,23 @@ void	render_loop(t_mlx *mlxs, t_data *img, t_scene *s)
 	mlx_put_image_to_window(mlxs->mlx_ptr, mlxs->win_ptr, img->img, 0, 0);
 }
 
+void	free_all(t_input *input_data, t_scene *s)
+{
+	int	i;
+
+	i = -1;
+	free(input_data->light);
+	free(input_data->sphere);
+	free(input_data->plane);
+	free(input_data->cylinder);
+	while (++i < input_data->num_li)
+		free(s->light[i]);
+	free(s->light);
+	while (++i < input_data->total_object)
+		free(s->world[i]);
+	free(s->world);
+}
+
 int	main(int ac, char **av)
 {
 	t_mlx	mlxs;
@@ -66,14 +83,6 @@ int	main(int ac, char **av)
 	mlx_hook(mlxs.win_ptr, 2, 0, key_hook, NULL);
 	mlx_hook(mlxs.win_ptr, 17, 0, close_window, NULL);
 	mlx_loop(mlxs.mlx_ptr);
-	free_parsing(&input_data);
+	free_all(&input_data, &s);
 	return (0);
-}
-
-void	free_parsing(t_input *input_data)
-{
-	free(input_data->light);
-	free(input_data->sphere);
-	free(input_data->plane);
-	free(input_data->cylinder);
 }

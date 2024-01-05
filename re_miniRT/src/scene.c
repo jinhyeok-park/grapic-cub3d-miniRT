@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:04:39 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 01:17:34 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:41:56 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	add_lights(t_scene *s, t_object **lights, t_input *input_data)
 	s->light = lights;
 }
 
-void	scene_init1(t_scene *s, t_input *input_data)
+void	scene_init(t_scene *s, t_input *input_data)
 {
 	t_object	**obj;
 	t_object	**lights;

@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:26:23 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 01:22:57 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:44:11 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,6 @@ typedef struct s_scene
 //main.c
 int				close_window(int keycode);
 int				key_hook(int keycode);
-void			free_parsing(t_input *input_data);
 //camera.c
 t_canvas		canvas(int width, int height);
 double			degrees_to_radians(double degrees);
@@ -244,7 +243,6 @@ t_light			*light_point(t_point3 light_origin, t_color3 light_color, \
 
 //object
 t_object		**create_object(int size);
-t_object		*object(int type, void *ele, t_color3 albedo);
 void			object_add(t_object **vector, void *ele, \
 							int type, t_color3 albedo);
 
@@ -286,8 +284,7 @@ t_plane			*plane(t_point3 point, t_vec3 normal);
 t_hit_record	record_init(void);
 
 //scene
-void			scene_init(t_scene *s);
-void			scene_init1(t_scene *s, t_input *input_data);
+void			scene_init(t_scene *s, t_input *input_data);
 void			init_canvas_camera(t_scene *s, t_input *input_data);
 void			create_objects_lights(t_scene *s, t_input *input_data, \
 							t_object ***obj, t_object ***lights);

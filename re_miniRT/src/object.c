@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:23:41 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 00:56:10 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:41:47 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,6 @@ t_object	**create_object(int size)
 		ret[i] = NULL;
 		i++;
 	}
-	return (ret);
-}
-
-t_object	*object(int type, void *ele, t_color3 albedo)
-{
-	t_object	*ret;
-
-	ret = malloc(sizeof(t_object));
-	if (!ret)
-		exit(1);
-	if (type == CIRCLE)
-		ret->type = CIRCLE;
-	else if (type == LIGHT)
-		ret->type = LIGHT;
-	ret->size = 1;
-	ret->element = ele;
-	ret->albedo = albedo;
 	return (ret);
 }
 
