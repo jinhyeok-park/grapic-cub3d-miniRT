@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:21:24 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/04 20:05:00 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/05 14:51:29 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,6 @@ t_bool	shadow_hit(t_scene *s, t_ray light_ray, t_hit_record light_rec)
 		{
 			if (hit_sphere((void *)s->world[i]->element, \
 			&light_ray, &light_rec))
-				return (TRUE);
-		}
-		else if (s->world[i]->type == PLANE)
-		{
-			if (hit_plane((void *)s->world[i]->element, &light_ray, &light_rec))
 				return (TRUE);
 		}
 		else if (s->world[i]->type == CYLINDER)

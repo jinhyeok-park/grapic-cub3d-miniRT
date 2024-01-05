@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:23:41 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 12:41:17 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:57:42 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_object	**create_object(int size)
 {
 	int			i;
 	t_object	**ret;
-	
+
 	ret = (t_object **)malloc(sizeof(t_object *) * size);
 	if (!ret)
 	{
@@ -34,7 +34,7 @@ t_object	**create_object(int size)
 	return (ret);
 }
 
-t_object	*object(int type, void* ele, t_color3 albedo)
+t_object	*object(int type, void *ele, t_color3 albedo)
 {
 	t_object	*ret;
 

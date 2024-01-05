@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:04:39 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/05 12:41:46 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/05 15:14:36 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,6 @@
 #include "light.h"
 #include "plane.h"
 #include "cylinder.h"
-
-void	init_canvas_camera(t_scene *s, t_input *input_data)
-{
-	s->canvas = canvas(1000, 800);
-	s->camera = camera(&(s->canvas), input_data->cam.orig, \
-						input_data->cam.fov, input_data->cam.dir);
-}
-
-void	create_objects_lights(t_scene *s, t_input *input_data, \
-							t_object ***obj, t_object ***lights)
-{
-	*obj = create_object(input_data->total_object);
-	*lights = create_object(input_data->num_li);
-	s->world = *obj;
-	s->light = NULL;
-	s->ambient = input_data->ambient;
-}
 
 void	add_spheres(t_object **obj, t_input *input_data)
 {
@@ -87,7 +70,8 @@ void	add_lights(t_scene *s, t_object **lights, t_input *input_data)
 	while (i < input_data->num_li)
 	{
 		li = light_point(input_data->light[i].origin, \
-					color3(1, 1, 1), input_data->light[i].bright_ratio);
+					input_data->light[i].light_color, \
+					input_data->light[i].bright_ratio);
 		object_add(lights, (void *)li, LIGHT, color3(0, 0, 0));
 		i++;
 	}

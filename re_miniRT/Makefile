@@ -6,7 +6,7 @@
 #    By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:24:31 by jinhyeok          #+#    #+#              #
-#    Updated: 2024/01/03 15:42:09 by minjcho          ###   ########.fr        #
+#    Updated: 2024/01/05 13:59:29 by minjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,11 @@ SOURCES = ./src/main.c\
 			./src/plane.c\
 			./src/cylinder.c\
 			./src/parsing.c\
+			./src/parsing_utils.c\
+			./src/parsing_get.c\
+			./src/parsing_initial.c\
+			./src/parsing_object.c\
+			./src/scene_init.c\
 
 INCLUDES = ./include
 
