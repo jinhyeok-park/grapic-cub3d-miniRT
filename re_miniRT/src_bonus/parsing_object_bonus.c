@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:54:17 by minjcho           #+#    #+#             */
-/*   Updated: 2024/01/06 17:28:42 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 01:17:26 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 void	parse_ambient(t_input *src, char **tocken)
 {

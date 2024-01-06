@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:26:23 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 17:02:52 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:31:04 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef MINIRT_BONUS_H
+# define MINIRT_BONUS_H
 
 # define FALSE	0
 # define TRUE	1
 # define EPSILON 1e-6
-# define OBJECTSIZE 100
 # define CIRCLE 1
 # define LIGHT 2
 # define PLANE 3
 # define CYLINDER 4
-# define KSN 64;
-# define KS 0.5;
-# define EPYS 0.00001;
+# define KSN 64
+# define KS 0.5
+# define EPYS 0.00001
 
 # include "../libft/inc/libft.h"
 # include "../mlx/mlx.h"

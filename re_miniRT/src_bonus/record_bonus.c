@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.c                                            :+:      :+:    :+:   */
+/*   record.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/20 13:12:30 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 01:17:47 by minjcho          ###   ########.fr       */
+/*   Created: 2023/12/20 13:45:04 by jinhyeok          #+#    #+#             */
+/*   Updated: 2024/01/06 01:17:36 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
-t_light	*light_point(t_point3 light_origin, t_color3 light_color, \
-					double bright_ratio)
+t_hit_record	record_init(void)
 {
-	t_light	*light;
+	t_hit_record	record;
 
-	light = (t_light *)malloc(sizeof(t_light));
-	if (!light)
-		return (NULL);
-	light->origin = light_origin;
-	light->light_color = light_color;
-	light->bright_ratio = bright_ratio;
-	return (light);
+	record.tmin = 0.00001;
+	record.tmax = INFINITY;
+	record.t = INFINITY;
+	return (record);
 }

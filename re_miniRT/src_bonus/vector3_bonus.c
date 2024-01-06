@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 t_vec3	vmult_(t_vec3 vec, t_vec3 vec2)
 {

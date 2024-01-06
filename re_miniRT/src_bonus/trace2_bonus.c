@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 t_bool	hit_divide2(int index, t_scene *s, t_ray *ray, t_hit_record *local_rec)
 {

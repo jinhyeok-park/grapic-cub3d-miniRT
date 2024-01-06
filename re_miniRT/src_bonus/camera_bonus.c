@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:07:50 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 17:15:15 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 00:55:20 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 t_canvas	canvas(int width, int height)
 {

@@ -6,11 +6,11 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:19:12 by minjcho           #+#    #+#             */
-/*   Updated: 2024/01/06 17:12:59 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 00:55:51 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 t_bool	hit_cylinder_side(t_cylinder *cy, t_ray *ray, \
 						t_hit_record *rec, double *t_side)
