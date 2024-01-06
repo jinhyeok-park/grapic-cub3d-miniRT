@@ -6,79 +6,44 @@
 #    By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 17:24:31 by jinhyeok          #+#    #+#              #
-#    Updated: 2024/01/06 17:27:01 by minjcho          ###   ########.fr        #
+#    Updated: 2024/01/06 19:07:31 by minjcho          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-SOURCES =	./src/main.c\
-			./src/color3.c\
-			./src/pixel.c\
-			./src/vector1.c\
-			./src/vector2.c\
-			./src/vector3.c\
-			./src/vector4.c\
-			./src/camera.c\
-			./src/sphere.c\
-			./src/trace.c\
-			./src/trace2.c\
-			./src/trace3.c\
-			./src/object.c\
-			./src/scene.c\
-			./src/record.c\
-			./src/light.c\
-			./src/plane.c\
-			./src/cylinder.c\
-			./src/parsing.c\
-			./src/parsing_utils.c\
-			./src/parsing_get.c\
-			./src/parsing_initial.c\
-			./src/parsing_object.c\
-			./src/scene_init.c\
-			./src/exit.c\
-			./src/cylinder_utils.c\
-			./src/cylinder_hits.c\
+CFLAGS = -Wall -Wextra -Werror -Iincludes
 
-SOURCES_BONUS =	./src_bonus/main_bonus.c\
-				./src_bonus/color3_bonus.c\
-				./src_bonus/pixel_bonus.c\
-				./src_bonus/vector1_bonus.c\
-				./src_bonus/vector2_bonus.c\
-				./src_bonus/vector3_bonus.c\
-				./src_bonus/vector4_bonus.c\
-				./src_bonus/camera_bonus.c\
-				./src_bonus/sphere_bonus.c\
-				./src_bonus/trace_bonus.c\
-				./src_bonus/trace2_bonus.c\
-				./src_bonus/trace3_bonus.c\
-				./src_bonus/object_bonus.c\
-				./src_bonus/scene_bonus.c\
-				./src_bonus/record_bonus.c\
-				./src_bonus/light_bonus.c\
-				./src_bonus/plane_bonus.c\
-				./src_bonus/cylinder_bonus.c\
-				./src_bonus/parsing_bonus.c\
-				./src_bonus/parsing_utils_bonus.c\
-				./src_bonus/parsing_get_bonus.c\
-				./src_bonus/parsing_initial_bonus.c\
-				./src_bonus/parsing_object_bonus.c\
-				./src_bonus/scene_init_bonus.c\
-				./src_bonus/exit_bonus.c\
-				./src_bonus/cylinder_utils_bonus.c\
-				./src_bonus/cylinder_hits_bonus.c\
+NAME = miniRT
+BONUS_NAME = miniRT_bonus
 
-INCLUDES = ./includes
+SRC_DIR = src
+OBJ_DIR = obj
+BONUS_SRC_DIR = src_bonus
+BONUS_OBJ_DIR = obj_bonus
+INC_DIR = includes
 
-M_OBJ = $(SOURCES:./src/.c=.o)
-B_OBJ = $(SOURCES_BONUS:./src_bonus/.c=.o)
+SRCS_NAMES = main.c color3.c pixel.c vector1.c vector2.c vector3.c vector4.c camera.c \
+             sphere.c trace.c trace2.c trace3.c object.c scene.c record.c light.c \
+             plane.c cylinder.c parsing.c parsing_utils.c parsing_get.c parsing_initial.c \
+             parsing_object.c scene_init.c exit.c cylinder_utils.c cylinder_hits.c
+SRCS_BONUS_NAMES = main_bonus.c color3_bonus.c pixel_bonus.c vector1_bonus.c vector2_bonus.c \
+                   vector3_bonus.c vector4_bonus.c camera_bonus.c sphere_bonus.c trace_bonus.c \
+                   trace2_bonus.c trace3_bonus.c object_bonus.c scene_bonus.c record_bonus.c \
+                   light_bonus.c plane_bonus.c cylinder_bonus.c parsing_bonus.c \
+                   parsing_utils_bonus.c parsing_get_bonus.c parsing_initial_bonus.c \
+                   parsing_object_bonus.c scene_init_bonus.c exit_bonus.c cylinder_utils_bonus.c \
+                   cylinder_hits_bonus.c
+
+SRCS = $(addprefix $(SRC_DIR)/, $(SRCS_NAMES))
+OBJS = $(SRCS_NAMES:%.c=$(OBJ_DIR)/%.o)
+SRCS_BONUS = $(addprefix $(BONUS_SRC_DIR)/, $(SRCS_BONUS_NAMES))
+OBJS_BONUS = $(SRCS_BONUS_NAMES:%.c=$(BONUS_OBJ_DIR)/%.o)
 
 ifdef BONUS
-	OBJECTS = $(B_OBJ)
-	NAME = miniRT_bonus
+    OBJECTS = $(OBJS_BONUS)
+    NAME = $(BONUS_NAME)
 else
-	OBJECTS = $(M_OBJ)
-	NAME = miniRT
+    OBJECTS = $(OBJS)
 endif
 
 all: $(NAME)
@@ -87,10 +52,16 @@ $(NAME): $(OBJECTS)
 	make -C libft
 	make -C mlx
 	cp ./mlx/libmlx.dylib ./libmlx.dylib
-	$(CC) $^ -I./libft -Llibft -lft -I./mlx -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@ -I $(INCLUDES)
+	$(CC) $(OBJECTS) -I./libft -Llibft -lft -I./mlx -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@ -I $(INC_DIR)
 
-%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BONUS_OBJ_DIR)/%.o: $(BONUS_SRC_DIR)/%.c | $(BONUS_OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR) $(BONUS_OBJ_DIR):
+	@mkdir -p $@
 
 bonus:
 	make BONUS=1 all
@@ -98,14 +69,15 @@ bonus:
 clean:
 	make -C libft clean
 	make -C mlx clean
+	rm -f $(OBJS) $(OBJS_BONUS)
+	rm -rf $(OBJ_DIR) $(BONUS_OBJ_DIR)
 
 fclean: clean
 	make -C libft fclean
-	rm -rf $(NAME)
-	rm -rf ./miniRT_bonus
-	rm -rf ./mlx/libmlx.dylib
-	rm -rf libmlx.dylib
+	rm -f $(NAME) $(BONUS_NAME)
+	rm -f ./mlx/libmlx.dylib
+	rm -f libmlx.dylib
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

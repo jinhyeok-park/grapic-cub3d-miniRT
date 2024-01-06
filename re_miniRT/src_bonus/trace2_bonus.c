@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trace2.c                                           :+:      :+:    :+:   */
+/*   trace2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:20:06 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 16:31:28 by jinhyeok         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:07:47 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ t_bool	hit_divide(int index, t_scene *s, t_ray *ray, t_hit_record *rec)
 t_color3	phong_lighting(t_scene *scene)
 {
 	t_color3	light_color;
-	t_object	**lights;
 	int			size;
 	int			i;
 
 	light_color = color3(0, 0, 0);
-	lights = scene->light;
 	i = 0;
 	size = scene->light[0]->size;
 	while (i < size)

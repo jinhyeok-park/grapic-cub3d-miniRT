@@ -6,7 +6,7 @@
 /*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:23:41 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 01:41:47 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 19:05:42 by minjcho          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	assign_type(int type)
 void	object_add(t_object **vector, void *ele, int type, t_color3 albedo)
 {
 	t_object	*temp;
-	int			i;
-	int			c_size;
 
 	if (!vector || !ele)
 		exit(1);
