@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:26:23 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 17:24:09 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 17:47:16 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # define LIGHT 2
 # define PLANE 3
 # define CYLINDER 4
-# define KSN 64;
-# define KS 0.5;
-# define EPYS 0.00001;
+# define KSN 64
+# define KS 0.5
+# define EPYS 0.00001
 
 # include "../libft/inc/libft.h"
 # include "../mlx/mlx.h"
