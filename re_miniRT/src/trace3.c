@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:21:24 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 01:23:14 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 17:02:40 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,31 +70,7 @@ t_bool	is_shadow(t_scene *s, t_light *light)
 	light_rec.tmin = EPYS;
 	light_rec.t = light_len;
 	light_rec.tmax = light_len;
-	if (shadow_hit(s, light_ray, light_rec))
+	if (hit(s, &light_ray, &light_rec))
 		return (TRUE);
-	return (FALSE);
-}
-
-t_bool	shadow_hit(t_scene *s, t_ray light_ray, t_hit_record light_rec)
-{
-	int	i;
-
-	i = 0;
-	while (i < s->world[0]->size)
-	{
-		if (s->world[i]->type == CIRCLE)
-		{
-			if (hit_sphere((void *)s->world[i]->element, \
-			&light_ray, &light_rec))
-				return (TRUE);
-		}
-		else if (s->world[i]->type == CYLINDER)
-		{
-			if (hit_cylinder((void *)s->world[i]->element, \
-			&light_ray, &light_rec))
-				return (TRUE);
-		}
-		i++;
-	}
 	return (FALSE);
 }

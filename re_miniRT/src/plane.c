@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:03:54 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 01:17:36 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 16:12:53 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ t_bool	hit_plane(t_plane *p, t_ray *ray, t_hit_record *rec)
 		{
 			rec->t = t;
 			rec->p = vplus(ray->orig, vmult(ray->dir, t));
-			rec->normal = p->normal;
+			if (dot > 0)
+				rec->normal = vmult(p->normal, -1);
+			else
+				rec->normal = p->normal;
 			return (TRUE);
 		}
 	}

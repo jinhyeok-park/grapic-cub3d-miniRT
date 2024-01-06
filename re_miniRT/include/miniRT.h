@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:26:23 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 01:44:11 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 17:02:52 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,7 +310,6 @@ t_bool			hit(t_scene *s, t_ray *ray, t_hit_record *rec);
 t_bool			hit_divide(int index, t_scene *s, t_ray *ray, \
 					t_hit_record *rec);
 t_bool			is_shadow(t_scene *s, t_light *light);
-t_bool			shadow_hit(t_scene *s, t_ray light_ray, t_hit_record light_rec);
 
 //vector3
 t_vec3			vec3(double x, double y, double z);

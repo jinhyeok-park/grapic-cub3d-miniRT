@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjcho <minjcho@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jinhyeok <jinhyeok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:20:06 by jinhyeok          #+#    #+#             */
-/*   Updated: 2024/01/06 01:23:19 by minjcho          ###   ########.fr       */
+/*   Updated: 2024/01/06 16:31:28 by jinhyeok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_bool	hit_divide(int index, t_scene *s, t_ray *ray, t_hit_record *rec)
 	local_rec = record_init();
 	if (hit_divide2(index, s, ray, &local_rec))
 		hit = TRUE;
-	if (hit && local_rec.t < rec->t)
+	if (hit && local_rec.t < rec->t && local_rec.t < rec->tmax)
 	{
 		rec->t = local_rec.t;
 		rec->p = local_rec.p;
